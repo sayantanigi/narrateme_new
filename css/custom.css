@@ -1,0 +1,418 @@
+/*=================
+    Webfonts
+======================*/
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,500,700,900,300);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800);
+
+@font-face {
+    font-family: 'softelegance';
+    src: url('../fonts/softelegance.woff2') format('woff2'),
+        url('../fonts/softelegance.woff') format('woff'),
+        url('../fonts/softelegance.ttf') format('truetype');
+}
+
+
+/*====================
+    Resets
+========================*/
+/*header {
+    overflow: hidden;
+}*/
+
+section {
+    padding: 3em 0;
+}
+
+.header_top {
+    display: block;
+    min-height: 35px;
+    margin: 0;
+    position: relative;
+    text-align: center;
+    transition: 1s all;
+    width: 100%;
+    z-index: 52;
+    background-color: #000000;
+    background-image: none;
+}
+
+.header-bottom {
+    display: block;
+    float: left;
+    min-height: 66px;
+    margin: 0;
+    position: relative;
+    text-align: center;
+    transition: 1s all;
+    width: 100%;
+    z-index: 52;
+    background-color: #504E5A;
+    background-image: none;
+}
+
+header .main_nav .navbar {
+    min-height: 64px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 30px;
+}
+
+header .main_nav .navbar .navbar-header {
+    width: 15%;
+}
+
+header .main_nav .navbar .navbar-collapse {
+    width: 85%;
+    visibility: visible;
+}
+
+.navbar-default .navbar-nav>li>a {
+    padding: 10px;
+    font-size: 15px;
+}
+
+.main_nav .navbar-brand {
+    min-height: 51px;
+    text-align: left;
+    width: 168px;
+    z-index: 4;
+    padding: 0;
+    display: inline-block;
+}
+
+.main_nav .navbar-brand img {
+    width: 100%;
+}
+
+.main_nav .navbar-default {
+    background-color: transparent;
+    background-image: none;
+    font-family: Roboto;
+    background-color: rgba(248, 248, 248, 0);
+    border-color: rgba(231, 231, 231, 0);
+    padding: 0;
+    margin: 0;
+}
+
+.main_nav .navbar-default .navbar-nav>li>a {
+    color: #ffffff;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.main_nav .navbar-default .navbar-nav>li>a::after {
+    color: #ffffff;
+    content: "|";
+    position: absolute;
+    right: 0;
+}
+
+.main_nav .navbar-default .navbar-nav li:last-child a::after {
+    content: "";
+}
+
+.main_nav .navbar-default .navbar-nav>li:hover a {
+    color: #fff;
+}
+
+.main_nav .navbar-default .navbar-nav>li>a::before {
+    -webkit-transition: height cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -moz-transition: height cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -ms-transition: height cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    -o-transition: height cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: height cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    content: '';
+    width: 100%;
+    height: 0px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #ffffff;
+}
+
+.main_nav .navbar-default .navbar-nav>li>a:hover::before {
+    height: 2px;
+    -webkit-transition: width 0.2s;
+    -moz-transition: width 0.2s;
+    transition: width 0.2s;
+}
+
+/*-----------------------------Boy-Content---------------------------------------------*/
+.body_content {
+    padding: 0 0 2em;
+    position: relative;
+    display: block;
+}
+
+.page_header {
+    background: url(../images/Contact-Us-Back.jpg);
+    min-height: 70px;
+    position: relative;
+}
+
+.over_bg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.19);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    min-height: 100%;
+}
+
+.page_header .block-header {
+    padding: 0 0;
+    margin: 0;
+}
+
+.bb-custom-container {
+    padding: 20px 15px;
+    display: block;
+    position: relative;
+
+}
+
+.abt_txt h2 {
+    font-size: 20px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.abt_txt p {
+    font-size: 15px;
+}
+
+.cust_size img {
+    width: 100%;
+}
+
+.jumbotron {
+    background: #358CCE;
+    color: #FFF;
+    border-radius: 0px;
+}
+
+.jumbotron-sm {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.jumbotron small {
+    color: #FFF;
+}
+
+.h1 small {
+    font-size: 24px;
+}
+
+/* New Style */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+header {
+    min-height: 100px;
+}
+
+.body_content {
+    flex: 1;
+}
+
+.Product_Container {
+    position: relative;
+}
+
+.Product_Container img {
+    width: 100%;
+    height: 900px;
+    object-fit: cover;
+}
+
+.page_inner_content {
+    padding: 50px;
+}
+
+.Product_Body {
+    padding: 50px;
+}
+
+#Login-area .modal-content {
+    background-color: #FFFFFF;
+    width: 500px;
+    height: 500px;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+#Login-area .modal-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#wb_FontAwesomeIcon1 {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+#userfild,
+#passfild {
+    height: 40px;
+    line-height: 37px;
+    width: 80%;
+    padding: 0 15px;
+}
+
+#wb_Text1 {
+    height: 40px;
+    line-height: 37px;
+    width: 80%;
+    text-align: center;
+    margin: 15px 0;
+}
+
+#login-butt {
+    padding: 0 30px;
+    background: #576042;
+    border: 0;
+    border-radius: 100px;
+    height: 33px;
+    color: #fff;
+    font-size: 15px;
+}
+
+#wb_Text2 {
+    text-align: center;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#wb_Text2 .Item-Head_dark {
+    font-size: 15px !important;
+}
+
+@media(max-width:767px){
+    .complogolist .comlogo{
+        width: 50%;
+        float: left;
+    }
+    .Contact-Us .Contact-Us-Data
+    header{
+        overflow: visible !important;
+    }
+    header .main_nav .navbar .navbar-collapse {
+        width: 100%;
+        visibility: visible;
+        position: absolute;
+        left: 0;
+        text-align: left;
+        top: 64px;
+        background: #000;
+        border: 0;
+    }
+    header .main_nav .navbar .navbar-header{
+      width: 100%;
+   }
+   .header_top #Search-site_form{
+      justify-content: center;
+   }
+   .main_nav .navbar-default .navbar-nav>li>a::after{
+    display: none;
+   }
+   .Contact-Us .Contact-Us-Data{
+    background-size: cover !important;
+    height: auto !important;
+   }
+   .Contact-Us .Contact-Us-Data{
+    padding: 50px 15px !important;
+   }
+   .Contact-Us .Contact-Us-Data p.Contact-Us-Data-Heading{
+    font-size: 24px !important;
+    text-align: center !important;
+   }
+   .Contact-Us .Contact-Us-Data p.Contact-Us-Data-SubHeading{
+    font-size: 14px !important;
+    text-align: center !important;
+   }
+   .Contact-Us .Contact-Us-Social{
+    justify-content: center !important;
+   }
+}
+@media(max-width:575px){
+    .map_section{
+        height: auto !important;
+    }
+    .Product_Container img{
+        height: 500px;
+    }
+    .testimonial-block .testimonial-block-data{
+        max-width: 100% !important;
+    }
+   .banner-section .banner-text h1{
+    font-size: 40px !important;
+   }
+   .testimonial-block .testimonial-block-data .testimonial-block-text .text-slate-900{
+    font-size: 15px !important;
+   }
+   .banner-section .banner-text{
+    padding: 0 20px !important;
+   }
+   .banner-section .banner-text p{
+    font-size: 15px !important;
+   }
+   .Product_Container .Product-carousel{
+    width: 90% !important;
+   }
+   .page_header{
+        height: auto !important;
+        padding: 30px 15px !important;
+   }
+   .page_inner_content, .Product_Body{
+        padding: 30px 15px !important;
+   }
+   .page_header p{
+    width: 100% !important;
+    font-size: 15px !important;
+   }
+   .page_header h2{
+    font-size: 25px !important;
+   }
+   header .main_nav .navbar{
+    margin: 0;
+   }
+   #wb_Text12, #wb_Text13{
+    min-height: auto !important;
+   }
+   #wb_LayoutGrid7{
+    padding-top: 15px;
+    padding-bottom: 15px;;
+   }
+   #Login-area .modal-dialog{
+    width: 100% !important;
+   }
+   #Login-area .modal-content{
+    width: 95% !important;
+   }
+   .testimonial-block-img .roundBox{    
+        width: 100% !important;
+   }
+}

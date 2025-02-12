@@ -1,0 +1,85 @@
+<?php
+//error_reporting(0);
+define('PROJECT_NAME', 'Narrateme');
+define('ALIAS', 'Narrate Me');
+define('FAVICON', 'images/favicon.png');
+define('TABLE_PREFIX', 'na_');
+define('NARRATEME_SEO_PREFIX','narrateme');
+
+/*if($_SERVER['HTTP_HOST']=='192.168.1.126' || $_SERVER['HTTP_HOST']=='127.0.0.1' || $_SERVER['HTTP_HOST']=='localhost') {
+	define('DB_HOST', 'localhost');
+	define('DB_USERNAME', 'narrate');
+	define('DB_PASS', 'info#2018');
+	define('DB_NAME', 'narrate');
+	define("BASE_URL", "http://localhost/narrateme/");
+	define("DIR_PATH", str_replace("\\","/",$_SERVER['DOCUMENT_ROOT'])."/admin/");
+	$title = "Narrateme";
+	$siteurl = "http://localhost/narrateme/";
+	$siteurladmin = "http://localhost/narrateme/admin/";
+	$siteimg = "http://localhost/narrateme/images";
+
+} else {
+	define('DB_HOST', 'localhost');
+	define('DB_USERNAME', 'narrate');
+	define('DB_PASS', 'info#2018');
+	define('DB_NAME', 'narrate');
+	define("BASE_URL", 'http://localhost/narrateme/admin/');
+	define("DIR_PATH", str_replace("\\","/",$_SERVER['DOCUMENT_ROOT'])."/admin/");
+
+	$title = "Narrateme";
+	$siteimg = "http://localhost/narrateme/images";
+	$siteurl = "http://localhost/narrateme/";
+	$siteurladmin = "http://localhost/narrateme/admin/";
+	$activationlink = "http://localhost/narrateme/memberactivation.php";
+	//Change the max upload size
+	ini_set('post_max_size', '100M');
+	ini_set('upload_max_filesize', '100M');
+}
+
+$con = mysql_connect(DB_HOST,DB_USERNAME,DB_PASS) or die("Database connection error");
+$db = mysql_select_db(DB_NAME,$con) or die("Database connection error");
+
+//For Settings
+$getsettings = "SELECT * FROM ".TABLE_PREFIX."settings";
+$getsettings = mysql_query($getsettings) or die(mysql_error());
+
+while($rowsettings = mysql_fetch_assoc($getsettings)) {
+   $settings[$rowsettings['config_type']] = $rowsettings['config_val'];
+}*/
+
+if($_SERVER['HTTP_HOST']=='192.168.1.126' || $_SERVER['HTTP_HOST']=='127.0.0.1' || $_SERVER['HTTP_HOST']=='localhost') {
+	//echo "string1";
+	define('DB_HOST', 'localhost');
+	define('DB_USERNAME', 'root');
+	define('DB_PASS', '');
+	define('DB_NAME', 'narrateme');
+	define("BASE_URL", "http://localhost/narrateme/");
+	define("DIR_PATH", str_replace("\\","/",$_SERVER['DOCUMENT_ROOT'])."/admin/");
+	$title = "Narrateme";
+	$siteurl = "http://localhost/narrateme/";
+	$siteurladmin = "http://localhost/narrateme/admin/";
+	$siteimg = "http://localhost/narrateme/images";
+} else {
+	//echo "string2";
+	define('DB_HOST', 'localhost');
+	define('DB_USERNAME', 'root');
+	define('DB_PASS', '');
+	define('DB_NAME', 'narrateme');
+	define("BASE_URL", 'http://localhost/narrateme/admin/');
+	define("DIR_PATH", str_replace("\\","/",$_SERVER['DOCUMENT_ROOT'])."/admin/");
+	$title = "Narrateme";
+	$siteimg = "http://localhost/narrateme/images";
+	$siteurl = "http://localhost/narrateme/";
+	$siteurladmin = "http://localhost/narrateme/admin/";
+	$activationlink = "http://localhost/narrateme/memberactivation.php";
+	//Change the max upload size
+	ini_set('post_max_size', '100M');
+	ini_set('upload_max_filesize', '100M');
+}
+
+$con = new mysqli(DB_HOST,DB_USERNAME,DB_PASS,DB_NAME);
+
+if ($con->connect_error) {
+	die("Connection failed: " . $con->connect_error);
+}
+?>
