@@ -11,12 +11,7 @@ $(function () {
 </script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/jquery.datetimepicker.css" />
 <style type="text/css">
-label {width: 125px; display: block; float: left;}
-label input {display: none;}
-label span {display: block; width: 17px; height: 17px; border: 1px solid black; float: left; margin: 0 5px 0 0; position: relative;}
-label.active span:after {content: " "; position: absolute; left: 3px; right: 3px; top: 3px; bottom: 3px; background: black;}
-.topul li {list-style-type: none;}
-.cstmClass {border: 1px solid #eee; padding: 10px; width: 100%; margin-bottom: 10px;}
+    label {width: 125px;display: block;float: left;}label input {display: none;}label span {display: block;width: 17px;height: 17px;border: 1px solid black;float: left;margin: 0 5px 0 0;position: relative;}label.active span:after {content: " ";position: absolute;left: 3px;right: 3px;top: 3px;bottom: 3px;background: black;}.topul li {list-style-type: none;}
 </style>
 <div class="page-container">
     <div class="page-sidebar-wrapper">
@@ -28,8 +23,8 @@ label.active span:after {content: " "; position: absolute; left: 3px; right: 3px
         <div class="page-content">
             <div class="page-bar">
                 <ul class="page-breadcrumb">
-                    <li><a href="<?php echo base_url(); ?>supercontrol/user/dashboard">Home</a> <i class="fa fa-circle"></i> </li>
-                    <li><span>Admin panel</span> </li>
+                    <li> <a href="<?php echo base_url(); ?>supercontrol/user/dashboard">Home</a> <i class="fa fa-circle"></i> </li>
+                    <li> <span>Admin panel</span> </li>
                 </ul>
             </div>
             <div class="row">
@@ -40,13 +35,10 @@ label.active span:after {content: " "; position: absolute; left: 3px; right: 3px
                                 <div class="portlet box blue-hoki">
                                     <div class="portlet-title">
                                         <div class="caption"><i class="fa fa-gift"></i>ADD TIME TABLE</div>
-                                        <div class="tools">
-                                            <a href="javascript:;" class="reload"></a>
-                                            <a href="javascript:;" class="remove"></a>
-                                        </div>
+                                        <div class="tools"><a href="javascript:;" class="reload"></a><a href="javascript:;" class="remove"></a></div>
                                     </div>
                                     <div class="portlet-body form">
-                                        <form action="<?php echo base_url() . 'supercontrol/batch/add' ?>" class="form-horizontal" method="post" enctype="multipart/form-data" onsubmit="check()">
+                                        <form action="<?php echo base_url().'supercontrol/batch/add' ?>" class="form-horizontal" method="post" enctype="multipart/form-data" onsubmit="check()">
                                             <div class="form-body">
                                                 <div class="form-group">
                                                     <b><label class="col-md-3 control-label">Total Session *</label></b>
@@ -215,6 +207,7 @@ label.active span:after {content: " "; position: absolute; left: 3px; right: 3px
             if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
                 return [false, ""];
             }
+
             return [true, ""];
         }
     });
@@ -223,33 +216,33 @@ label.active span:after {content: " "; position: absolute; left: 3px; right: 3px
             if (date.getMonth() == dateToDisable.getMonth() && date.getDate() == dateToDisable.getDate()) {
                 return [true, "custom-date-style"];
             }
+
             return [true, ""];
         }
     });
     $('#datetimepicker_dark').datetimepicker({ theme: 'dark' })
+
 </script>
 <script>
-$(document).ready(function () {
-    $('#total_session').on("focusout", function () {
-        var val = $(this).val();
-        var html = '';
-        $('#startdate').empty(); // Clear the startdate div data
-        for (var i = 1; i <= val; i++) {
-            html += '<div class="cstmClass"><div class="form-group"><b><label class="col-md-3 control-label">Session' + i + ' Date *</label></b><div class="col-md-8"><input type="date" name="date[]" id="timepicker1"  class="form-control" /><label id="errorBox"></label></div></div>';
-            html += '<div class="form-group"><b><label class="col-md-3 control-label">Session' + i + ' Start Time *</label></b><div class="col-md-8"><input type="time" name="startTime[]" id="timepicker1"  class="form-control" /><label id="errorBox"></label></div></div>';
-            html += '<div class="form-group"><b><label class="col-md-3 control-label">Session' + i + ' End Time *</label></b><div class="col-md-8"><input type="time" name="endTime[]" id="timepicker1"  class="form-control" /><label id="errorBox"></label></div></div>';
-            html += '<div class="form-group"><b><label class="col-md-3 control-label">Session' + i + ' Time Type *</label></b><div class="col-md-8"><input type="text" name="time_type[]" class="form-control" /><label id="errorBox"></label></div></div>';
-            html += '<div class="form-group"><b><label class="col-md-3 control-label">Session' + i + ' Session Objective *</label></b><div class="col-md-8"><input type="text" name="session_objective[]" class="form-control" /><label id="errorBox"></label></div></div>';
-            html += '<div class="form-group"><b><label class="col-md-3 control-label">Session' + i + ' Location *</label></b><div class="col-md-8"><select name="session_location[]" class="form-control"><option>-- Select Location --</option><?php if (is_array($locations) && count($locations) > 0) { foreach ($locations as $ls) { ?><option value="<?= $ls->id ?>"><?= $ls->name ?></option><?php }} ?></select><label id="errorBox"></label></div></div></div>';
-        }
-        $('#startdate').append(html);
-        //console.log(html);
+    $(document).ready(function () {
+        $('#total_session').on("focusout", function () {
+            var val = $(this).val();
+            var html = '';
+            for (var i = 1; i <= val; i++) {
+                var html = '<div class="form-group"><b><label class="col-md-3 control-label">Session' + i + ' Date *</label></b><div class="col-md-8"><input type="date" name="date[]" id="timepicker1"  class="form-control" /><label id="errorBox"></label></div></div><div class="form-group"><b><label class="col-md-3 control-label">Session' + i + ' Start Time *</label></b><div class="col-md-8"><input type="time" name="startTime[]" id="timepicker1"  class="form-control" /><label id="errorBox"></label></div></div><div class="form-group"><b><label class="col-md-3 control-label">Session' + i + ' End Time *</label></b><div class="col-md-8"><input type="time" name="endTime[]" id="timepicker1"  class="form-control" /><label id="errorBox"></label></div></div><div class="form-group"><b><label class="col-md-3 control-label">Session' + i + ' Time Type *</label></b><div class="col-md-8"><input type="text" name="time_type[]"   class="form-control" /><label id="errorBox"></label></div></div><div class="form-group"><b><label class="col-md-3 control-label">Session' + i + ' Session Objective *</label></b><div class="col-md-8"><input type="text" name="session_objective[]"   class="form-control" /><label id="errorBox"></label></div></div><div class="form-group"><b><label class="col-md-3 control-label">Session' + i + ' Location *</label></b><div class="col-md-8"><select name="session_location[]" class="form-control"><option>-- Select Location --</option><?php if (is_array($locations) && count($locations) > 0) {
+                    foreach ($locations as $ls) { ?>
+                            < option value = "<?= $ls->id ?>" > <?= $ls->location_name ?></option> <?php }
+                } ?></select > <label id="errorBox"></label></div ></div > ';
+                $('#startdate').append(html);
+            }
+            console.log(html);
+        });
     });
-});
 </script>
 <script>
     function cityget(sl, j) {
         var id = sl.value;
+
         if (id == '') {
             jQuery('#cityShow' + j).html('<option>--Select Course--</option>');
             return false;

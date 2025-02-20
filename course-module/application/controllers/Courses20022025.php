@@ -11,12 +11,8 @@ class Courses extends CI_Controller {
 		//$this->load->model('general_model');
 		$this->load->model('generalmodel');
 		$this->load->helper('string');
-        if(empty($this->session->userdata('loginuserID'))){
-            header('location', 'http://localhost/narrateme/');
-        }
 	}
-	public function index($id = false) {
-        $this->session->set_userdata('loginuserID', base64_decode($id));
+	public function index() {
 		$data['content'] = $this->generalmodel->show_data_id("sm_page_content", 3, "id", "get", "");
 		$data['country'] = $this->db->query("SELECT * FROM countries")->result_array();
 		$data['levels'] = $this->db->query("SELECT * FROM sm_levels WHERE level_status = 1")->result_array();
@@ -209,48 +205,42 @@ class Courses extends CI_Controller {
 		$this->load->view('reviewlist');
 		$this->load->view('footer');
 	}
-	public function payment($course_id = false) {
-        //echo $course_id; die();
-        //$id = $this->session->userdata('is_userlogged_in');
-        $id = $this->session->userdata('loginuserID');
-        $courseData = $this->db->query("SELECT * FROM sm_course WHERE course_id = '".$course_id."'")->row();
+	public function payment() {
+		$id = $this->session->userdata('is_userlogged_in');
 		$usertype = $this->generalmodel->fetch_single_join("SELECT user_type from  sm_member where email='$id'");
 		$type = $usertype->user_type;
-		if (!$this->session->userdata('loginuserID')) {
-			$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Please Login for book a course! </div>');
-			header('location', 'http://localhost/narrateme/');
+		if (!$this->session->userdata('is_user_id')) {
+			$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Please Login for  book a course! </div>');
+			redirect('auth/login', 'refresh');
 		}
 		if (($type == 'inst') || ($type == 'busi')) {
 			$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Please Login  through student Account! </div>');
-			header('location', 'http://localhost/narrateme/');
+			redirect('auth/login', 'refresh');
 		} else {
 			$transaction_id = 'OESPAY' . random_string('alnum', 12) . date('d-m-Y');
-			//$member_id = $this->session->userdata('is_userlogged_in');
-            $member_id = $this->session->userdata('loginuserID');
+			$member_id = $this->session->userdata('is_userlogged_in');
 			$data = array(
-				'course_id' => $course_id,
-				'course_name' => $courseData->course_name,
-				'course_type' => $courseData->course_name,
+				'course_id' => $this->input->post('course_id'),
+				'course_name' => $this->input->post('course_name'),
+				'course_type' => $this->input->post('type'),
 				'book_date' => date('Y-m-d H:i:s'),
-				'mode' => $courseData->course_mode,
-				'price' => $courseData->price,
-				'student_id' => $id,
-                'business_id'=> $courseData->userid,
+				'mode' => $this->input->post('mode'),
+				'price' => $this->input->post('price'),
+				'student_id' => $member_id,
 				'transaction_id' => $transaction_id,
-				'pay_status' => 'paid',
+				'pay_status' => 'unpaid',
 				'status' => '0'
 			);
 			$details = $this->generalmodel->show_data_id('sm_course_booking', '', '', 'insert', $data);
 			$datapay = array(
 				'transaction_id' => $transaction_id,
 				'transaction_date' => date('Y-m-d H:i:s'),
-				'pay_status' => 'paid',
-				'member_id' => $id,
+				'pay_status' => 'unpaid',
+				'member_id' => $member_id,
 				'status' => '0'
 			);
-            //print_r($datapay); die();
-			$details = $this->generalmodel->show_data_id('sm_payment', '', '', 'insert', $datapay);
-            $data['title'] = 'Payment';
+			$details = $this->generalmodel->show_data_id('payment', '', '', 'insert', $datapay);
+			$data['title'] = 'Payment';
 			$this->load->view('header', $data);
 			$this->load->view('payment');
 			$this->load->view('footer');
@@ -317,8 +307,8 @@ class Courses extends CI_Controller {
 		$primary_key = 'course_id';
 		$courseId = $this->uri->segment(3);
 		$data['batchlist'] = $batchlist = $this->db->get_where('sm_batch', array('courseId' => $courseId))->row();
-		// $batchId = $batchlist->batchId;
-		// $data['batchSession'] = $session = $this->db->get_where('sm_course_sessions', array('batch_id' => $batchId))->result();
+		$batchId = $batchlist->batchId;
+		$data['batchSession'] = $session = $this->db->get_where('sm_course_sessions', array('batch_id' => $batchId))->result();
 		$data['course'] = $this->db->get_where('sm_course', array('course_id' => $courseId))->row();
 		$data['price'] = $batchlist->price;
 		$wheredata = $this->uri->segment(3);

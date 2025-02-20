@@ -5,7 +5,7 @@ $view=getAnyTableWhereData('na_member', " AND username='".$_SESSION["username"].
 //==========================SUPRATIM 15/07/2016===================
 if ($_REQUEST['submit']=="Update Userdata") {
     extract($_POST);
-    $dateob=date('Y-m-d',strtotime($dateofbirth));
+    $dateob=date('Y-m-d',strtotime($dateofbirth));	
     $data=array('first_name'=>mysql_real_escape_string(stripcslashes($first_name)),'last_name'=>mysql_real_escape_string(stripcslashes($last_name)),'dateofbirth'=>$dateob,'gender'=>$gender,'url'=>$url,'domain_name'=>$domain_name,'website'=>$website,'phone_no'=>$phone_no,'email'=>$email,'address'=>$address,'informational_description'=>addslashes($informational_description), 'current_student'=>$current_student, 'cellularphone_no'=>$cellularphone_no, 'IpAddress'=>$IpAddress, 'skype_url'=>$skype_url, 'social_seq_no'=>$social_seq_no, 'lastedit' => date('Y-m-d H:i:s'));
     $result=updateData($data,'na_member', "id='".$id."'") ;
 	echo "<script language=\"JavaScript\" type=\"text/javascript\">\n";
@@ -33,8 +33,8 @@ $pagename = basename($_SERVER['PHP_SELF']);
 //$viewdrigs = getAlldataWhereData('na_st_drug', " AND ind_id='".$_SESSION["userid"]."' ");
 $viewreport = getAnyTableWhereData('na_reports', " AND ind_id='".$_SESSION["userid"]."' AND id = '".$_REQUEST['id']."' ");
 $studensreportssql = "SELECT * FROM na_reports WHERE ind_id = '".$_SESSION["userid"]."'";
-$resquery15 = mysqli_query($con, $studensreportssql) or mysqli_error();
-$stunum15 = mysqli_num_rows($resquery15);
+$resquery15 = mysql_query($studensreportssql) or mysql_error();
+$stunum15 = mysql_num_rows($resquery15);
 ?>
 
 <style>
@@ -173,8 +173,8 @@ $stunum15 = mysqli_num_rows($resquery15);
 <div class="block-header">
   <h2>Welcome Back <span style="color:#666; font-weight:400;">
     <?=ucfirst($_SESSION["username"])?>
-    </span>	<small><?php if($view['ind'] ==1){ echo "Individual,";} if($view['std'] ==1){ echo "Student,";} if($view['edu'] ==1){ echo "Educational Institute,";}
-		if($view['edu'] ==1){echo "Instructional Facility or School";}
+    </span>	<small><?php if($view['ind'] ==1){ echo "Individual,";} if($view['std'] ==1){ echo "Student,";} if($view['edu'] ==1){ echo "Educational Institute,";} 
+		if($view['edu'] ==1){echo "Instructional Facility or School";} 
 		?></small></h2>
 </div>
 <div id="profile-main" class="card">
@@ -450,11 +450,11 @@ $stunum15 = mysqli_num_rows($resquery15);
                             <script type="text/javascript">
 									// When the document is ready
 									$(document).ready(function () {
-
+										
 										$('#example1').datepicker({
 											format: "dd/mm/yyyy"
-										});
-
+										});  
+									
 									});
 								</script>
                           </dd>
@@ -484,23 +484,23 @@ $stunum15 = mysqli_num_rows($resquery15);
                 </script>
   <!--==============Educational Institution===============-->
 
-
-
+                 
+               
                <!-- Activities & Talents  ends [GENERAL]-->
-
-
+               
+            
                <!-- Sports & Athletics Activities [04-11-2016]-->
-
-
+               
+              
               <!-- Entertainment Activities [04-11-2016]-->
-
+             
                <!-- Entertainment Activities [04-11-2016]-->
-
-
+             
+              
               <!-- Arts & Sciences Activities [04-11-2016]-->
-
+            
                 <!--  Add Activity/Experience Type starts  -->
-
+              
               	<div class="panel panel-collapse" id="spoathact">
                 <div <?php if($_REQUEST['activityexppanel3']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="activityexppanel3">
                   <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse" data-parent="#accordionTeal" href="#accordionTeal-four3" aria-expanded="false"> Add Activity/Experience Type:
@@ -556,7 +556,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                           <input type="hidden" name="activityexppanel3" value="1" />
                           <input type="hidden" name="activityexpid3" value="<?=$viewactivityexp3['id']?>" />
                           <div class="pmbb-edit" style="display:block;">
-
+                           
                             <dl class="dl-horizontal">
                               <dt class="p-t-10">Date of the Activity/Experience*</dt>
                               <dd>
@@ -565,7 +565,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </div>
                                 <span id="activityexp_error2" style="color:#ff0000;">&nbsp;</span> </dd>
                             </dl>
-
+                           
                             <dl class="dl-horizontal">
                               <dt class="p-t-10">Description of the Activity/Experience</dt>
                               <dd>
@@ -596,7 +596,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                         <form name="activityexpform3" id="activityexpform3" onsubmit="return activityexp3();" enctype="multipart/form-data" action="<?=$_SERVER['PHP_SELF']?>" method="post">
                           <input type="hidden" name="activityexppanel3" value="1" />
                           <div class="pmbb-edit">
-
+                           
                             <dl class="dl-horizontal">
                               <dt class="p-t-10">Date of the Activity/Experience*</dt>
                               <dd>
@@ -605,7 +605,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </div>
                                 <span id="activityexp_error3" style="color:#ff0000;">&nbsp;</span> </dd>
                             </dl>
-
+                           
                             <dl class="dl-horizontal">
                               <dt class="p-t-10">Description of the Activity/Experience</dt>
                               <dd>
@@ -656,11 +656,11 @@ $stunum15 = mysqli_num_rows($resquery15);
                   </div>
                 </div>
               </div>
-
+              
               	<!--  Add Activity/Experience Type Ends  -->
-
+              
               	<!-- Add coach starts -->
-
+              
               	<div class="panel panel-collapse" id="saat">
                 <div <?php if($_REQUEST['coachpanel3']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="coachpanel1">
                   <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse" data-parent="#accordionTeal" href="#accordionTeal-sevencoach3" aria-expanded="false"> Add Coach:
@@ -853,12 +853,12 @@ $stunum15 = mysqli_num_rows($resquery15);
                   </div>
                 </div>
               </div>
-
+              
               	<!-- Add coach Ends -->
-
+              
                 <!-- Add video presentation start -->
-
-                <div class="panel panel-collapse" id="saat">
+                
+                <div class="panel panel-collapse" id="saat">		
                     <div <?php if($_REQUEST['activityvideopanel33']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="activityvideopanel33">
                       <h4 class="panel-title"> <a aria-expanded="true" href="#accordionTeal-activityvideo33" data-parent="#accordionTeal" data-toggle="collapse" class="">Add Video Presentations: </a> </h4>
                     </div>
@@ -1069,12 +1069,12 @@ $stunum15 = mysqli_num_rows($resquery15);
                       </div>
                     </div>
                   </div>
-
+                  
               	<!-- Add video presentation end -->
-
+                
                 <!-- Add Audio presentation start -->
-
-                <div class="panel panel-collapse" id="saat">
+                
+                <div class="panel panel-collapse" id="saat">		
                     <div <?php if($_REQUEST['activityaudiopanel3']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="activityaudiopanel3">
                       <h4 class="panel-title"> <a aria-expanded="true" href="#accordionTeal-activityaudio3" data-parent="#accordionTeal" data-toggle="collapse" class=""> Add Audio Presentations: </a> </h4>
                     </div>
@@ -1287,29 +1287,29 @@ $stunum15 = mysqli_num_rows($resquery15);
                       </div>
                     </div>
                   </div>
-
+                  
               	<!-- Add Audio presentation end -->
                 </div>
                 <script>
 						$(document).ready(function(){
-
+												   
 							$("#spatac2").click(function(){
 								$("#spoathact2").toggle(800);
 							});
-
+							
 						});
 				 </script>
-
+                 
                <!-- Arts & Sciences Activities [04-11-2016]-->
-
-
+              
+               
               <!--  Instructional Information starts  -->
               <div>
                 <h4 style="cursor:pointer;" class="btn btn-success"><a id="inst" style="color:#FFF;">Instructional Information :</a></h4>
               </div>
               <div id="inststart" <?php if($_REQUEST['inst']==1 || $_REQUEST['instructionalinfopanel']==1){?>style="display:block;"<?php }else{?> style="display:none;" <?php }?>>
                 <!-- Add instructional information start -->
-                <div class="panel panel-collapse">
+                <div class="panel panel-collapse">		
 
                     <div <?php if($_REQUEST['instructionalinfopanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="instructionalinfopanel">
 
@@ -1358,7 +1358,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                       <th>Current Class/Course/Seminar Schedule</th>
                                       <th>Awards Conferred</th>
                                       <th>Status</th>
-									  <th>Track Date(Add/Edit)</th>
+									  <th>Track Date(Add/Edit)</th>	
                                       <th>Action</th>
 
                                     </tr>
@@ -1388,11 +1388,11 @@ $stunum15 = mysqli_num_rows($resquery15);
                                       <td><?=date('d-m-Y',strtotime($viewinstructionalinfo['seminar_schedule']));?></td>
 
                                       <td><?=$viewinstructionalinfo['award'];?></td>
-
+                                      
                                        <td><?php if($viewinstructionalinfo['status'] ==1){echo"Public";} else if($viewinstructionalinfo['status'] ==2){ echo"Private";}else{ echo"Friends";}?></td>
-
+                                     
                                       <td><?=date('jS F Y',strtotime($viewinstructionalinfo['lastedit']))?></td>
-
+                                      
                                       <td><a href="individual.php?ind_id=<?=$viewinstructionalinfo['ind_id']?>&id=<?=$viewinstructionalinfo['id']?>&editinstructionalinfo=awards&accr=1&inst=1&instructionalinfopanel=1">Edit</a>&nbsp;|&nbsp;<a href="individual.php?ind_id=<?=$viewinstructionalinfo['ind_id']?>&id=<?=$viewinstructionalinfo['id']?>&delinstructionalinfo=val&instructionalinfopanel=1&gen=1" style="color:#ff0000;">Delete</a> </td>
 
                                     </tr>
@@ -1712,9 +1712,9 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                   </div>
               	<!-- Add instructional information end -->
-
+                
                 <!-- Add Curriculum/Activity Transcript(Complete) start -->
-                <div class="panel panel-collapse">
+                <div class="panel panel-collapse">		
 
                     <div <?php if($_REQUEST['completecurrpanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="awardpanel">
 
@@ -1774,7 +1774,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                       <td><?php if($viewcompletecurr['status'] ==1){echo"Public";} else if($viewcompletecurr['status'] ==2){ echo"Private";}else{ echo"Friends";}?></td>
 
                                       <td><?=date('jS F Y',strtotime($viewcompletecurr['lastedit']))?></td>
-
+                                     
                                       <td><a href="individual.php?ind_id=<?=$viewcompletecurr['ind_id']?>&id=<?=$viewcompletecurr['id']?>&editcompletecurr=awards&accr=1&inst=1&completecurrpanel=1">Edit</a>&nbsp;|&nbsp;<a href="individual.php?ind_id=<?=$viewcompletecurr['ind_id']?>&id=<?=$viewcompletecurr['id']?>&delcompletecurr=val&completecurrpanel=1&gen=1" style="color:#ff0000;">Delete</a> </td>
 
                                     </tr>
@@ -2029,9 +2029,9 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                   </div>
               	<!-- Add Curriculum/Activity Transcript(Complete) end -->
-
+                
                 <!-- Add Curriculum/Activity Transcript(Incomplete or ongoing program) start -->
-                <div class="panel panel-collapse">
+                <div class="panel panel-collapse">		
 
                     <div <?php if($_REQUEST['incompletecurrpanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="awardpanel">
 
@@ -2092,7 +2092,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                       <td><?=$viewincompletecurr['messages'];?></td>
                                        <td><?php if($viewincompletecurr['status'] ==1){echo"Public";} else if($viewincompletecurr['status'] ==2){ echo"Private";}else{ echo"Friends";}?></td>
                                       <td><?=date('jS F Y',strtotime($viewincompletecurr['lastedit']))?></td>
-
+                                     
                                       <td><a href="individual.php?ind_id=<?=$viewincompletecurr['ind_id']?>&id=<?=$viewincompletecurr['id']?>&editincompletecurr=awards&accr=1&inst=1&incompletecurrpanel=1">Edit</a>&nbsp;|&nbsp;<a href="individual.php?ind_id=<?=$viewincompletecurr['ind_id']?>&id=<?=$viewincompletecurr['id']?>&delincompletecurr=val&incompletecurrpanel=1&gen=1" style="color:#ff0000;">Delete</a> </td>
 
                                     </tr>
@@ -2347,9 +2347,9 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                   </div>
               	<!-- Add Curriculum/Activity Transcript(Incomplete or ongoing program) end -->
-
+                
                  <!-- Add Instructional/Activity Records start -->
-                <div class="panel panel-collapse">
+                <div class="panel panel-collapse">		
 
                     <div <?php if($_REQUEST['instructionalactpanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="awardpanel">
 
@@ -2629,9 +2629,9 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                   </div>
               	<!-- Add Instructional/Activity Records end -->
-
+                
                 <!-- Add video presentation start -->
-                <div class="panel panel-collapse">
+                <div class="panel panel-collapse">		
 
                     <div <?php if($_REQUEST['instructionalvideopanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="awardpanel">
 
@@ -2770,7 +2770,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </dd>
 
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
 
                                 <dt class="p-t-10">IP Address to live camera</dt>
@@ -2786,7 +2786,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </dd>
 
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
 
                                 <dt class="p-t-10">Comments by Others</dt>
@@ -2884,7 +2884,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </dd>
 
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
 
                                 <dt class="p-t-10">IP Address to live camera</dt>
@@ -2900,7 +2900,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </dd>
 
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
 
                                 <dt class="p-t-10">Comments by Others</dt>
@@ -2972,9 +2972,9 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                   </div>
               	<!-- Add video presentation end -->
-
+                
                 <!-- Add Audio presentation start -->
-                <div class="panel panel-collapse">
+                <div class="panel panel-collapse">		
 
                     <div <?php if($_REQUEST['instructionalaudiopanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="awardpanel">
 
@@ -3046,12 +3046,12 @@ $stunum15 = mysqli_num_rows($resquery15);
                                       <td><?=$viewinstructionalaudio['description'];?></td>
 
                                       <td><?=$viewinstructionalaudio['link_audio'];?></td>
-
+                                      
                                       <td><?=$viewinstructionalaudio['IP_Address'];?></td>
-
+                                      
                                       <td><?=$viewinstructionalaudio['comments'];?></td>
                                        <td><?php if($viewinstructionalaudio['status'] ==1){echo"Public";} else if($viewinstructionalaudio['status'] ==2){ echo"Private";}else{ echo"Friends";}?></td>
-
+                                      
                                       <td><?=date('jS F Y',strtotime($viewinstructionalaudio['lastedit']))?></td>
 
                                       <td><a href="individual.php?ind_id=<?=$viewinstructionalaudio['ind_id']?>&id=<?=$viewinstructionalaudio['id']?>&editinstructionalaudio=awards&accr=1&inst=1&instructionalaudiopanel=1">Edit</a>&nbsp;|&nbsp;<a href="individual.php?ind_id=<?=$viewinstructionalaudio['ind_id']?>&id=<?=$viewinstructionalaudio['id']?>&delinstructionalaudio=val&instructionalaudiopanel=1&gen=1" style="color:#ff0000;">Delete</a> </td>
@@ -3128,7 +3128,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </dd>
 
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
 
                                 <dt class="p-t-10">IP Address to live camera</dt>
@@ -3144,7 +3144,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </dd>
 
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
 
                                 <dt class="p-t-10">Comments by Others</dt>
@@ -3242,7 +3242,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </dd>
 
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
 
                                 <dt class="p-t-10">IP Address to live camera</dt>
@@ -3258,7 +3258,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </dd>
 
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
 
                                 <dt class="p-t-10">Comments by Others</dt>
@@ -3330,9 +3330,9 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                   </div>
               	<!-- Add Audio presentation end -->
-
+                
                 <!-- Add Award start -->
-                <div class="panel panel-collapse">
+                <div class="panel panel-collapse">		
 
                     <div <?php if($_REQUEST['instructionalawardpanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="awardpanel">
 
@@ -3385,12 +3385,12 @@ $stunum15 = mysqli_num_rows($resquery15);
 								  ?>
                                     <tr>
                                       <td><?=$viewinstructionalaward['name'];?></td>
-
+                                      
                                       <td><?=date('d-m-Y',strtotime($viewinstructionalaward['Date']));?></td>
 
                                       <td><?=$viewinstructionalaward['description'];?></td>
                                       <td><?php if($viewinstructionalaward['status'] ==1){echo"Public";} else if($viewinstructionalaward['status'] ==2){ echo"Private";}else{ echo"Friends";}?></td>
-
+                                      
                                       <td><?=date('jS F Y',strtotime($viewinstructionalaward['lastedit']))?></td>
 
                                       <td><a href="individual.php?ind_id=<?=$viewinstructionalaward['ind_id']?>&id=<?=$viewinstructionalaward['id']?>&editinstructionalaward=awards&accr=1&inst=1&instructionalawardpanel=1">Edit</a>&nbsp;|&nbsp;<a href="individual.php?ind_id=<?=$viewinstructionalaward['ind_id']?>&id=<?=$viewinstructionalaward['id']?>&delinstructionalaward=val&instructionalawardpanel=1&gen=1" style="color:#ff0000;">Delete</a> </td>
@@ -3429,9 +3429,9 @@ $stunum15 = mysqli_num_rows($resquery15);
                                     <input type='text' class="form-control" value="<?php echo $viewinstructionalaward['name']?>" id="name_type" name="name" data-toggle="dropdown" placeholder="Name/Type">
 
                                   </div>
-
+                                  
 								  <span id="instructionalaward_error3" style="color:#ff0000;">&nbsp;</span>
-
+									
                                 </dd>
 
                               </dl>
@@ -3448,7 +3448,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                                   </div>
 
-
+                                   
 
                                 </dd>
 
@@ -3514,9 +3514,9 @@ $stunum15 = mysqli_num_rows($resquery15);
                                     <input type='text' class="form-control" value="" id="name_type" name="name" data-toggle="dropdown" placeholder="Name/Type">
 
                                   </div>
-
+                                  
 								  <span id="instructionalaward_error3" style="color:#ff0000;">&nbsp;</span>
-
+									
                                 </dd>
 
                               </dl>
@@ -3533,7 +3533,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                                   </div>
 
-
+                                   
 
                                 </dd>
 
@@ -3618,7 +3618,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                   </div>
               	<!-- Add Award end -->
-
+              	
               </div>
               <script>
 						$(document).ready(function(){
@@ -3627,11 +3627,11 @@ $stunum15 = mysqli_num_rows($resquery15);
 						});
 						});
                 </script>
-              <!--  Instructional Information ends  -->
+              <!--  Instructional Information ends  --> 
               <!--====================Award==================-->
-
+               
               <!--====================Award==================-->
-              <div><h4 style="cursor:pointer;" class="btn btn-success"><a id="wirkexp" style="color:#FFF;"> Work Experience:</a></h4></div>
+              <div><h4 style="cursor:pointer;" class="btn btn-success"><a id="wirkexp" style="color:#FFF;"> Work Experience:</a></h4></div> 
               <!--====================Job====================-->
               <div class="panel panel-collapse" id="swirkexp" <?php if($_REQUEST['jobpanel']==1){?> style="display:block;" <?php }else{?> style="display:none;" <?php }?>>
                 <div <?php if($_REQUEST['jobpanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="jobpanel">
@@ -3836,9 +3836,9 @@ $stunum15 = mysqli_num_rows($resquery15);
                 </script>
               <!--====================Job====================-->
               <!--====================Reference==============-->
-                <div><h4 style="cursor:pointer;" class="btn btn-success"><a id="ref" style="color:#FFF;">References:</a></h4></div>
+                <div><h4 style="cursor:pointer;" class="btn btn-success"><a id="ref" style="color:#FFF;">References:</a></h4></div>              
                 <div id="refstart"<?php if($_REQUEST['ref']==1 || $_REQUEST['referencepanel']==1){?> style="display:block;" <?php }else{?> style="display:none;" <?php }?>>
-                <div class="panel panel-collapse">
+                <div class="panel panel-collapse">		
 
                     <div <?php if($_REQUEST['ref']==1 || $_REQUEST['referencepanel']==1){?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="referencepanel">
 
@@ -3929,7 +3929,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                                       <td><?=$viewreference['ref_recomvideo']?></td>
                                       <td><?php if($viewreference['status'] ==1){echo"Public";} else if($viewreference['status'] ==2){ echo"Private";}else{ echo"Friends";}?></td>
-
+                                      
                                       <td><?=date('jS F Y',strtotime($viewreference['lastedit']))?></td>
 
                                       <td><a href="individual.php?ind_id=<?=$viewreference['ind_id']?>&id=<?=$viewreference['id']?>&editreference=references&accr=1&referencepanel=1&ref=1&#ref">Edit</a>&nbsp;|&nbsp;<a href="individual.php?ind_id=<?=$viewreference['ind_id']?>&id=<?=$viewreference['id']?>&delreference=val&referencepanel=1" style="color:#ff0000;" onclick="return confirm('are you sure want to delete?')">Delete</a> </td>
@@ -3956,7 +3956,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                             <div class="pmbb-edit" style="display:block;">
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -3974,7 +3974,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -3994,7 +3994,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4012,7 +4012,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4030,7 +4030,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4048,7 +4048,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4066,7 +4066,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4084,7 +4084,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4135,7 +4135,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                             <div class="pmbb-edit">
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4153,7 +4153,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4173,7 +4173,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4191,7 +4191,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4209,7 +4209,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4227,7 +4227,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4245,7 +4245,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4263,7 +4263,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                               </dl>
 
-
+                              
 
                               <dl class="dl-horizontal">
 
@@ -4301,7 +4301,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                 </dd>
               </dl>
 
-
+                              
 
                               <div class="m-t-30">
 
@@ -4327,15 +4327,15 @@ $stunum15 = mysqli_num_rows($resquery15);
                   </div>
                 <script>
 						$(document).ready(function(){
-
+												   
 							$("#ref").click(function(){
 								$("#refstart").toggle(800);
 							});
-
+							
 						});
 				 </script>
               <!--====================Credit History Information==========-->
-               <div><h4 style="cursor:pointer;" class="btn btn-success"><a id="chi" style="color:#FFF;">Credit History Information </a></h4></div>
+               <div><h4 style="cursor:pointer;" class="btn btn-success"><a id="chi" style="color:#FFF;">Credit History Information </a></h4></div>  
                <div class="panel panel-collapse"  id="schi" <?php if($_REQUEST['creditpanel']==1 || $_REQUEST['issuerofreportpanel']==1){?> style="display:block;" <?php }else{?> style="display:none;" <?php }?>>
                     <!--======================Credit Report==================-->
                     <div <?php if($_REQUEST['creditpanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="creditpanel">
@@ -4384,9 +4384,9 @@ $stunum15 = mysqli_num_rows($resquery15);
                     <td><?=$viewcreport['description']?></td>
                     <td><a href="individual.php?addissuer=1&creditpanel=1&ind_id=<?=$viewcreport['ind_id']?>&id=<?=$viewcreport['id']?>"><img src="img/add.png" /></a></td>
                     <td><a id="si<?php echo $viewcreport['id']?>"><img src="img/show.png" /></a></td>
-
+                    
                     <td><?=date('jS F Y',strtotime($viewcreport['lastedit']))?></td>
-
+                    
                     <td><a href="individual.php?ind_id=<?=$viewcreport['ind_id']?>&id=<?=$viewcreport['id']?>&editcreport=creport&accr=1&creditpanel=1&creport=1">Edit</a>&nbsp;|&nbsp;<a onclick="return confirm('Are you sure you want to delete?');" href="individual.php?ind_id=<?=$viewcreport['ind_id']?>&id=<?=$viewcreport['id']?>&delcreport=val&creport=1" style="color:#ff0000;">Delete</a></td>
                     </tr>
                     <tr style="display:none; background-color:#000;" id="bottomtr<?php echo $viewcreport['id']?>">
@@ -4402,10 +4402,10 @@ $stunum15 = mysqli_num_rows($resquery15);
                                             <th>Track Date(Add/Edit)</th>
                                             <th>Action</th>
                                         </tr>
-                                        <?php
+                                        <?php 
 										//echo "select * from `na_credit_issuer_report` where `credit_report_id` =".$viewcreport['id']."";
 										$sqlissuer=mysql_query("select * from `na_credit_issuer_report` where `credit_report_id` =".$viewcreport['id']."");
-											while($rowissue=mysql_fetch_array($sqlissuer)){
+											while($rowissue=mysql_fetch_array($sqlissuer)){	
 										?>
                                         <tr>
                                        		<td><?php echo $rowissue['issuer_name']?></td>
@@ -4413,14 +4413,14 @@ $stunum15 = mysqli_num_rows($resquery15);
                                             <td><?php echo $rowissue['website']?></td>
                                             <td><?php echo $rowissue['url']?></td>
                                             <td><?=date('jS F Y',strtotime($rowissue['lastedit']))?></td>
-
-                                            <td><a href="individual.php?ind_id=<?=$rowissue['ind_id']?>&id=<?=$rowissue['id']?>&editissuer=1&creditpanel=1">Edit</a>&nbsp;|&nbsp;<a href="individual.php?ind_id=<?=$rowissue['ind_id']?>&id=<?=$rowissue['id']?>&delissuercreditreport=val&creditpanel=1" style="color:#ff0000;" onclick="return confirm('are you sure want to delete?')">Delete</a>
+                                            
+                                            <td><a href="individual.php?ind_id=<?=$rowissue['ind_id']?>&id=<?=$rowissue['id']?>&editissuer=1&creditpanel=1">Edit</a>&nbsp;|&nbsp;<a href="individual.php?ind_id=<?=$rowissue['ind_id']?>&id=<?=$rowissue['id']?>&delissuercreditreport=val&creditpanel=1" style="color:#ff0000;" onclick="return confirm('are you sure want to delete?')">Delete</a> 
                                             </td>
                                         </tr>
                                         <?php }?>
-
+                                        
                                     </thead>
-                                   </table>
+                                   </table> 
                             </div>
                         </td>
                     </tr>
@@ -4428,21 +4428,21 @@ $stunum15 = mysqli_num_rows($resquery15);
 					<script>
                     $(document).ready(function(){
                         $("#si<?php echo $viewcreport['id']?>").click(function(){
-
+							
                             $("#bottomtr<?php echo $viewcreport['id']?>").toggle();
                         });
-
+                        
                     });
                     </script>
                     <?php } ?>
                     </tbody>
                     </table>
                     </dl>
-
+                    
                     <?php }?>
                     </div>
                     <?php } else { ?>
-
+                    
                     <form name="issuerofreportform" id="issuerofreportform" onsubmit="return creditreport();" action="<?=$_SERVER['PHP_SELF']?>" method="post">
                     <input type="hidden" name="creditpanel" value="1" />
                     <input type="hidden" name="creditreportid" value="<?=$viewcreporttedit['id']?>" />
@@ -4502,7 +4502,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                         <label id="crdateeddor"></label>
                                         <span id="issuerofreport_error" style="color:#ff0000;">&nbsp;</span>
                         			</div>
-
+                        			 
                                 </dd>
                        		 </dl>
                         	<dl class="dl-horizontal">
@@ -4513,13 +4513,13 @@ $stunum15 = mysqli_num_rows($resquery15);
                         	</dl>
                         	<dl class="dl-horizontal">
                             	<dt class="p-t-10">Description</dt>
-
+                           
                         	<dd>
                         		<div class="fg-line">
                             		<textarea type="text" class="form-control" id="pagedes16" name="description"></textarea>
                         		</div>
                         	</dd>
-                        		</dl>
+                        		</dl> 
                         	  <dl class="dl-horizontal">
                             <dt class="p-t-10">Images/PDFs</dt>
                             <dd>
@@ -4527,7 +4527,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 <input type="file" class="form-control"  name="images[]" accept="image/pdf" multiple>
                               </div>
                             </dd>
-                          </dl>
+                          </dl>	
                             <dl class="dl-horizontal">
                             <dt class="p-t-10">Status</dt>
                             <dd>
@@ -4545,7 +4545,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                             </div>
                         	</div>
                     	</form>
-
+                    
 					<script>
                             function creditreport(){
 								if($("#report_date").val() == "" ){
@@ -4565,7 +4565,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 				    ?>
                         <form name="issuerofreportform" id="issuerofreportform" onsubmit="return issuer();" action="<?=$_SERVER['PHP_SELF']?>" method="post">
                         <input type="hidden" name="creditreportid" value="<?=$viewcreporttedit['id']?>" />
-
+                        
                         <input type="hidden" name="credit_report_id" value="<?php echo $_REQUEST['id']?>" />
                         <div class="pmbb-edit" style="display:block;">
                         <dl class="dl-horizontal">
@@ -4584,7 +4584,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                         </div>
                         </dd>
                         </dl>
-
+                        
                         <dl class="dl-horizontal">
                         <dt class="p-t-10">Website</dt>
                         <dd>
@@ -4645,7 +4645,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                         </div>
                         </dd>
                         </dl>
-
+                        
                         <dl class="dl-horizontal">
                         <dt class="p-t-10">Website</dt>
                         <dd>
@@ -4687,7 +4687,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                     </div>
                     </div>
                     <!--======================Issuer Report==================-->
-
+                  
                   	<!--======================Issuer Report==================-->
                     <div <?php if($_REQUEST['issuerofreportpanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="issuerofreportpanel">
                     <h4 class="panel-title"> <a class="collapsed" data-toggle="collapse" data-parent="#accordionTeal" href="#accordionTeal-fourteen" aria-expanded="false"> Add Issuer of Report:
@@ -4724,9 +4724,9 @@ $stunum15 = mysqli_num_rows($resquery15);
                     </thead>
                     <tbody>
                     <?php
-
+                    
                     while($viewissuerofreport = mysql_fetch_array($resquery14)) {
-
+                    
                     ?>
                     <tr>
                     <td><?=$viewissuerofreport['name']?></td>
@@ -4860,17 +4860,17 @@ $stunum15 = mysqli_num_rows($resquery15);
                   </div>
                <script>
 						$(document).ready(function(){
-
+												   
 							$("#chi").click(function(){
 								$("#schi").toggle(800);
 							});
-
+							
 						});
 				 </script>
               <!--====================Credit History Information==========-->
 
               <!--======================Injuries start===============-->
-
+             
              <!-- Miscellaneous and Other Report -->
               <div>
                 <h4 style="cursor:pointer;" class="btn btn-success"><a id="mis" style="color:#FFF;">Miscellaneous and Other Report: </a></h4>
@@ -4935,7 +4935,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                               <dd>
                                 <div class="dtp-container dropdown fg-line">
                                   <input type="text" class="form-control date-picker" id="report_date" name="report_date" value="<?=date("d-m-Y", strtotime($viewreport['report_date']))?>" data-toggle="dropdown">
-
+                                  
                                 </div>
                                </dd>
                             </dl>
@@ -4976,7 +4976,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                               <dd>
                                 <div class="dtp-container dropdown fg-line">
                                   <input type="text" class="form-control date-picker" id="report_date" name="report_date" data-toggle="dropdown">
-
+                                  
                                 </div>
                                  </dd>
                             </dl>
@@ -5021,7 +5021,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                 </div>
               </div>
               <!--  Report End  -->
-
+              
               <!-- Message start -->
               <div class="panel panel-collapse">
                 <div <?php if($_REQUEST['messagepanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="messagepanel">
@@ -5159,7 +5159,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                 </div>
               </div>
               <!-- Message end -->
-
+              
               <!-- Claim start -->
               <div class="panel panel-collapse">
                 <div <?php if($_REQUEST['claimpanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="claimpanel">
@@ -5204,7 +5204,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                   <td><?=$viewclaim['description']?></td>
                                    <td><?php if($viewclaim['status'] ==1){echo"Public";} else if($viewclaim['status'] ==2){ echo"Private";}else{ echo"Friends";}?></td>
                                   <td><?=date('jS F Y',strtotime($viewclaim['lastedit']))?></td>
-
+                                  
                                   <td><a href="individual.php?ind_id=<?=$viewclaim['ind_id']?>&id=<?=$viewclaim['id']?>&mis=1&editclaim=claims&accr=1&claimpanel=1">Edit</a>&nbsp;|&nbsp;<a href="individual.php?ind_id=<?=$viewclaim['ind_id']?>&id=<?=$viewclaim['id']?>&delclaim=val&claimpanel=1" style="color:#ff0000;" onclick="return confirm('are you sure want to delete?')">Delete</a></td>
                                 </tr>
                                 <?php } ?>
@@ -5318,7 +5318,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                 </div>
               </div>
               <!-- Claim end -->
-
+              
               <!-- Claim form start -->
               <div class="panel panel-collapse">
                 <div <?php if($_REQUEST['claimformpanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="claimformpanel">
@@ -5472,7 +5472,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                 </div>
               </div>
               <!-- Claim form end -->
-
+              
               <!-- Evaluation Report start -->
               <div class="panel panel-collapse">
                 <div <?php if($_REQUEST['evalpanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="evalpanel">
@@ -5627,7 +5627,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                 </div>
               </div>
               <!-- Evaluation Report end -->
-
+              
               <!-- Training Report start -->
               <div class="panel panel-collapse">
                 <div <?php if($_REQUEST['trnpanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="trnpanel">
@@ -5784,7 +5784,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                 </div>
               </div>
               <!-- Training Report end -->
-
+              
               <!-- Academic Report start -->
               <div class="panel panel-collapse">
                 <div <?php if($_REQUEST['acapanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="acapanel">
@@ -5938,7 +5938,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                 </div>
               </div>
               <!-- Academic Report end -->
-
+              
               <!-- Report Card start -->
               <div class="panel panel-collapse">
                 <div <?php if($_REQUEST['repcpanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="repcpanel">
@@ -5980,7 +5980,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                   <td><?=$viewrepc['description']?></td>
                                   <td><?php if($viewrepc['status'] ==1){echo"Public";} else if($viewrepc['status'] ==2){ echo"Private";}else{ echo"Friends";}?></td>
                                   <td><?=date('jS F Y',strtotime($viewrepc['lastedit']))?></td>
-
+                                  
                                   <td><a href="individual.php?ind_id=<?=$viewrepc['ind_id']?>&id=<?=$viewrepc['id']?>&mis=1&editrepc=repcs&accr=1&repcpanel=1">Edit</a>&nbsp;|&nbsp;<a href="individual.php?ind_id=<?=$viewrepc['ind_id']?>&id=<?=$viewrepc['id']?>&delrepc=val&repcpanel=1" style="color:#ff0000;">Delete</a></td>
                                 </tr>
                                 <?php } ?>
@@ -6101,7 +6101,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 						});
                 </script>
               <!-- Miscellaneous and Other Report -->
-
+               
                <!-- Healthcare Records, Healthcare History Starts -->
               <div>
                 <h4 style="cursor:pointer;" class="btn btn-success"><a id="health" style="color:#FFF;">Health Record, Health History:</a></h4>
@@ -6154,7 +6154,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                      <td><?php if($viewinjuries['status'] ==1){echo"Public";} else if($viewinjuries['status'] ==2){ echo"Private";}else{ echo"Friends";}?></td>
 
                                     <td><?=date('jS F Y',strtotime($viewinjuries['lastedit']))?></td>
-
+                                    
                                     <td><a href="individual.php?ind_id=<?=$viewinjuries['ind_id']?>&id=<?=$viewinjuries['id']?>&editinjuries=injuriess&accr=1&injuriespanel=1">Edit</a>&nbsp;|&nbsp;<a href="individual.php?ind_id=<?=$viewinjuries['ind_id']?>&id=<?=$viewinjuries['id']?>&delinjuries=val&injuriespanel=1" style="color:#ff0000;" onclick="return confirm('are you sure want to delete?')">Delete</a></td>
                                   </tr>
                                   <?php } ?>
@@ -6284,7 +6284,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                             }
 
-
+                            
 
                             </script>
                         </div>
@@ -6469,7 +6469,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                             }
 
-
+                            
 
                             </script>
                         </div>
@@ -6656,7 +6656,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                             }
 
-
+                            
 
                             </script>
                         </div>
@@ -6840,7 +6840,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                             }
 
-
+                            
 
                             </script>
                         </div>
@@ -7164,7 +7164,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                   </div>
                                 </dd>
                               </dl>
-
+                              
       <dl class="dl-horizontal">
                 <dt class="p-t-10">Images/PDFs</dt>
                 <dd>
@@ -7199,7 +7199,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                 <!--====================Prescription drugs/medication use =====================-->
                 <div class="panel panel-collapse">
                   <div <?php if($_REQUEST['pdrugmedication']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="pdrugmedication">
-                    <h4 class="panel-title">
+                    <h4 class="panel-title"> 
                     <a class="collapsed" data-toggle="collapse" data-parent="#accordionTeal" href="#accordionTeal-pdrugmedication" aria-expanded="false">Prescription Drugs/Medication Use :
                       <?=$pdrugmedication?>
                       </a> </h4>
@@ -7248,9 +7248,9 @@ $stunum15 = mysqli_num_rows($resquery15);
                                         <?php }?></td>
                                     <td><a href="individual.php?addpresmedi=1&pdrugmedication=1&preci_id=<?php echo $viewmepres['id']?>"><img src="img/add.png" /></a></td>
                                     <td><a id="sd<?php echo $viewmepres['id']?>"><img src="img/show.png" /></a></td>
-
+                                    
                                     <td><?=date('jS F Y',strtotime($viewmepres['lastedit']))?></td>
-
+                                    
                                     <td><a href="individual.php?ind_id=<?=$viewmepres['ind_id']?>&id=<?=$viewmepres['id']?>&edit=medical&accr=1&pdrugmedication=1">Edit</a>&nbsp;|&nbsp;<a onclick="return confirm('Are you sure you want to delete this ?');" href="individual.php?delprescr=val&ind_id=<?=$viewmepres['ind_id']?>&id=<?=$viewmepres['id']?>&del=val" style="color:#ff0000;">Delete</a></td>
                                   </tr>
                                   <?php //================****************==================*************===================?>
@@ -7266,10 +7266,10 @@ $stunum15 = mysqli_num_rows($resquery15);
                                                                     <th>Track Date(Add/Edit)</th>
                                                                     <th>Action</th>
                                                                 </tr>
-                                                                <?php
+                                                                <?php 
 																//echo "select * from `na_st_precimedicine` where `preci_id` =".$viewmepres['id']."";
 																$sqlimedi=mysql_query("select * from `na_st_precimedicine` where `preci_id` =".$viewmepres['id']."");
-                                                                      while($rowmedi=mysql_fetch_array($sqlimedi)){
+                                                                      while($rowmedi=mysql_fetch_array($sqlimedi)){	
                                                                 ?>
                                                                 <tr>
                                                                     <td><?php echo date('d-m-Y',strtotime($rowmedi['date_of_issue']))?></td>
@@ -7280,7 +7280,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                                                 </tr>
                                                                 <?php }?>
                                                             </thead>
-                                                           </table>
+                                                           </table> 
                                                     </div>
                                                 </td>
                     						</tr>
@@ -7288,10 +7288,10 @@ $stunum15 = mysqli_num_rows($resquery15);
 											<script>
                                            		$(document).ready(function(){
                                             		$("#sd<?php echo $viewmepres['id']?>").click(function(){
-
+                                            
                                             			$("#bottomtrmedi<?php echo $viewmepres['id']?>").toggle();
                                             		});
-
+                                            
                                             	});
                                             </script>
                                   <?php //================****************==================***************===================?>
@@ -7336,7 +7336,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                           </form>
                           <?php }?>
                           <?php } ?>
-
+                          
                           	<form name="drugform" id="drugform" onsubmit="return prescription()" enctype="multipart/form-data" action="<?=$_SERVER['PHP_SELF']?>" method="post">
                             <input type="hidden" name="prescriptionpanel" value="" />
                             <input type="hidden" name="prescriptionid" value="<?php echo $_REQUEST['pdrugmedication']?>" />
@@ -7346,9 +7346,9 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 <dd>
                                   <div class="fg-line">
                                     <input type="text" class="form-control" id="prescription_name" name="prescription_name" value="<?=$viewprescription['prescription_name']?>">
-                                    <label id="prescription_error3" style="color:#ff0000;">&nbsp;</label>
+                                    <label id="prescription_error3" style="color:#ff0000;">&nbsp;</label> 
                                   </div>
-
+                                  
                                   </dd>
                               </dl>
                                 <dl class="dl-horizontal">
@@ -7372,14 +7372,14 @@ $stunum15 = mysqli_num_rows($resquery15);
                                   </div>
                                    </dd>
                               </dl>
-
+                              
                               <div class="m-t-30">
                                 <button class="btn btn-primary btn-sm" name="submit" value="prescriptionsubmit">Save</button>
                                 <button onclick="window.location.href='individual.php?pdrugmedication=1'" data-pmb-action="reset" class="btn btn-link btn-sm">Cancel</button>
                               </div>
                             </div>
                           </form>
-
+                          
 							<script>
                             function prescription(){
                                 if($("#prescription_name").val() == ""){
@@ -7397,7 +7397,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                              <?php //=====================Edit subdata========================?>
                           	 <?php if($_REQUEST['edit']=='editpresdata'){?>
                         	<!--=============================-->
-                            <?php
+                            <?php 
 							 $sqlsubpric = getAnyTableWhereData('na_st_precimedicine', " AND ind_id='".$_SESSION["userid"]."' AND id = '".$_REQUEST['id']."' ");
 							 //print_r($sqlsubpric); exit();
 							?>
@@ -7405,7 +7405,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                         	<form name="drugform" id="drugform" onsubmit="return precimedi()" action="<?=$_SERVER['PHP_SELF']?>" method="post">
                             <input type="hidden" name="preci_id" value="<?=$_REQUEST['preci_id']?>" />
                             <input type="hidden" name="pmedi" value="">
-
+                           
                               <dl class="dl-horizontal">
                                 <dt class="p-t-10">Date Of Issue*</dt>
                                 <dd>
@@ -7436,7 +7436,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 <button class="btn btn-primary btn-sm" name="submit" value="precimedisubmit">Save</button>
                                 <button onclick="window.location.href='individual.php?pdrugmedication=1'" data-pmb-action="reset" class="btn btn-link btn-sm">Cancel</button>
                               </div>
-
+                              
                           </form>
                           <?php }?>
                           <script>
@@ -7453,15 +7453,15 @@ $stunum15 = mysqli_num_rows($resquery15);
                             <style>
 							#prescription_error3{color:#F00;}
 							</style>
-                        <!---->
-
+                        <!---->  
+                        
                           	 <?php //=====================Edit Sub Data=======================?>
                              <?php if($_REQUEST['addpresmedi']==1){?>
                         	<!---->
                         	<form name="drugform" id="drugform" onsubmit="return precimedi()" action="<?=$_SERVER['PHP_SELF']?>" method="post">
                             <input type="hidden" name="pmedi" value="1">
                             <input type="hidden" name="preci_id" value="<?php echo $_REQUEST['preci_id']?>" />
-
+                           
                               <dl class="dl-horizontal">
                                 <dt class="p-t-10">Date Of Issue*</dt>
                                 <dd>
@@ -7493,7 +7493,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 <button class="btn btn-primary btn-sm" name="submit" value="precimedisubmit">Save</button>
                                 <button onclick="window.location.href='individual.php?pdrugmedication=1'" data-pmb-action="reset" class="btn btn-link btn-sm">Cancel</button>
                               </div>
-
+                            
                           </form>
                           <script>
                             function precimedi(){
@@ -7515,11 +7515,11 @@ $stunum15 = mysqli_num_rows($resquery15);
                             <style>
 							#prescription_error3{color:#F00;}
 							</style>
-                        <!---->
+                        <!---->  
                         <?php }?>
                         </div>
-
-
+                        
+                        
                       </div>
                     </div>
                   </div>
@@ -7608,7 +7608,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                   </div>
                                   <span id="reason_error" style="color:#ff0000;">&nbsp;</span> </dd>
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
                                 <dt class="p-t-10">Status</dt>
                                 <dd>
@@ -7709,7 +7709,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                   </div>
                 </div>
                 <!-- =================== Wellness Activity information starts ==================-->
-                <div class="panel panel-collapse">
+                <div class="panel panel-collapse">		
 
                     <div <?php if($_REQUEST['wellness_actpanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="awardpanel">
 
@@ -7756,7 +7756,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                       <td><?=$viewwellness_act['description'];?></td>
                                       <td><?=$viewwellness_act['outcome'];?></td>
                                       <td><?=date('jS F Y',strtotime($viewwellness_act['lastedit']))?></td>
-
+                                      
                                       <td><a href="individual.php?ind_id=<?=$viewwellness_act['ind_id']?>&id=<?=$viewwellness_act['id']?>&editwellness_act=awards&accr=1&inj=1&wellness_actpanel=1">Edit</a>&nbsp;|&nbsp;<a href="individual.php?ind_id=<?=$viewwellness_act['ind_id']?>&id=<?=$viewwellness_act['id']?>&delwellness_act=val&wellness_actpanel=1&gen=1" style="color:#ff0000;" onclick="return confirm('are you sure want to delete?')">Delete</a> </td>
                                     </tr>
                                     <?php } ?>
@@ -7910,9 +7910,9 @@ $stunum15 = mysqli_num_rows($resquery15);
                     </div>
                   </div>
                 <!-- =================== Wellness Activity information starts ==================-->
-
+                
                 <!-- =================== Fitness/Exercise/Training Activity information starts ==================-->
-                <div class="panel panel-collapse">
+                <div class="panel panel-collapse">		
 
                     <div <?php if($_REQUEST['fitnesspanel']!='') { ?>class="panel-heading active" <?php } else { ?>class="panel-heading" <?php } ?> role="tab" id="awardpanel">
 
@@ -7958,7 +7958,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                       <th>Outcome</th>
                                       <th>Status</th>
                                       <th>Track Date(Add/Edit)</th>
-
+                                      
                                       <th>Action</th>
                                     </tr>
                                   </thead>
@@ -7974,7 +7974,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                       <td><?=$viewfitness['outcome'];?></td>
                                       <td><?php if($viewfitness['status'] ==1){echo"Public";} else if($viewfitness['status'] ==2){ echo"Private";}else{ echo"Friends";}?></td>
                                       <td><?=date('jS F Y',strtotime($viewfitness['lastedit']))?></td>
-
+                                      
                                       <td><a href="individual.php?ind_id=<?=$viewfitness['ind_id']?>&id=<?=$viewfitness['id']?>&editfitness=awards&accr=1&inj=1&fitnesspanel=1">Edit</a>&nbsp;|&nbsp;<a href="individual.php?ind_id=<?=$viewfitness['ind_id']?>&id=<?=$viewfitness['id']?>&delfitness=val&fitnesspanel=1&gen=1" style="color:#ff0000;" onclick="return confirm('are you sure want to delete?')">Delete</a> </td>
 
                                     </tr>
@@ -8015,7 +8015,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </dd>
 
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
 
                                 <dt class="p-t-10">Instructional Facility or School</dt>
@@ -8031,7 +8031,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </dd>
 
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
 
                                 <dt class="p-t-10">Date of use</dt>
@@ -8044,7 +8044,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                                   </div>
 
-
+                                   
 
                                 </dd>
 
@@ -8065,7 +8065,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </dd>
 
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
 
                                 <dt class="p-t-10">Outcome</dt>
@@ -8093,7 +8093,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                   </div>
                 </dd>
               </dl>
-
+                              
                               <div class="m-t-30">
 
                                 <button class="btn btn-primary btn-sm" name="submit" type="submit" value="fitnesssubmit">Save</button>
@@ -8129,7 +8129,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </dd>
 
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
 
                                 <dt class="p-t-10">Instructional Facility or School</dt>
@@ -8145,7 +8145,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                 </dd>
 
                               </dl>
-
+                              
                               <dl class="dl-horizontal">
 
                                 <dt class="p-t-10">Date of use</dt>
@@ -8158,7 +8158,7 @@ $stunum15 = mysqli_num_rows($resquery15);
 
                                   </div>
 
-
+                                   
 
                                 </dd>
 
@@ -8214,7 +8214,7 @@ $stunum15 = mysqli_num_rows($resquery15);
                                       </div>
                                     </dd>
                                   </dl>
-
+                              
                               <div class="m-t-30">
 
                                 <button class="btn btn-primary btn-sm" name="submit" type="submit" value="fitnesssubmit">Save</button>
@@ -8257,9 +8257,9 @@ $stunum15 = mysqli_num_rows($resquery15);
                     </div>
 
                   </div>
-
+                
                 <!-- =================== Fitness/Exercise/Training Activity information starts ==================-->
-
+                
               </div>
               <script>
 					$(document).ready(function(){

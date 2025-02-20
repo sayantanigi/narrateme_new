@@ -1,110 +1,47 @@
 <style>
-    .list-box figure img {
-        height: 215px !important;
-    }
-
-    .price-view {
-        text-align: justify !important;
-    }
-
-    .upcoming-courses {
-        padding: 0px !important;
-    }
-
-    .couldnt-find-course {
-        padding: 90px 0 90px !important;
-    }
-
-    .search-courses {
-        padding: 0 !important;
-    }
-
-    .emply-resume-list {
-        width: 100%;
-        text-align: center;
-        padding: 0px 0px 60px 0;
-    }
-
-    .list-box {
-        float: left;
-        width: 100%;
-        background: #ffffff;
-        margin-top: 0px;
-        box-shadow: 0 0 10px #ff9900;
-        -moz-border-radius: 8px;
-        -ms-border-radius: 8px;
-        -o-border-radius: 8px;
-        border-radius: 8px;
-        overflow: hidden;
-        padding: 0 0 25px 0px;
-    }
-
-    .other-courses {
-        background-size: 100% 475px !important;
-        padding: 0 !important;
-    }
-
-    .list-box-courses {
-        float: left;
-        width: 100%;
-        background: #ffffff;
-        margin-top: 0px;
-        box-shadow: 0 0 10px #ff9900;
-        -moz-border-radius: 8px;
-        -ms-border-radius: 8px;
-        -o-border-radius: 8px;
-        border-radius: 8px;
-        overflow: hidden;
-        padding: 0 0 25px 0px;
-    }
-
-    .list-box-courses figure {
-        margin: 0 0 10px;
-        padding: 0;
-        border: 4px solid #ededf0;
-    }
-
-    .courses-view-other {
-        padding: 0 !important;
-    }
-
-    .both-bt a.button-default {
-        min-width: 46%;
-        font-size: 18px;
-        padding: 10px 6px 13px 6px;
-    }
-
-    .price-view span {
-        padding: 5px 15px 5px 15px;
-        text-align: center;
-        min-width: 180px;
-        color: #ffffff;
-        font-size: 16px;
-        background: #2e3192;
-        border-radius: 34px;
-        line-height: normal;
-        display: inline-block;
-    }
-
-    .courses-view-other ul li {
-        padding: 25px 24px !important;
-    }
-
-    .formcourse .wrapper-form {
-        padding: 0 !important;
-    }
-
-    .users_name_err {
-        display: none;
-    }
-
-    .users_email_err {
-        display: none;
-    }
-
-    .users_phno_err {
-        display: none;
-    }
+.list-box figure img{height:215px!important}.price-view{text-align:justify!important}.courses-view-other,.formcourse .wrapper-form,.search-courses,.upcoming-courses{padding:0!important}.couldnt-find-course{padding:90px 0!important}.emply-resume-list{width:100%;text-align:center;padding:0 0 60px}.list-box,.list-box-courses{float:left;width:100%;background:#fff;margin-top:0;box-shadow:0 0 10px #f90;-moz-border-radius:8px;-ms-border-radius:8px;-o-border-radius:8px;border-radius:8px;overflow:hidden;padding:0 0 25px}.other-courses{background-size:100% 475px!important;padding:0!important}.list-box-courses figure{margin:0 0 10px;padding:0;border:4px solid #ededf0}.both-bt a.button-default{min-width:46%;font-size:18px;padding:10px 6px 13px}.price-view span{padding:5px 15px;text-align:center;min-width:180px;color:#fff;font-size:16px;background:#2e3192;border-radius:34px;line-height:normal;display:inline-block}.courses-view-other ul li{padding:25px 24px!important}.users_email_err,.users_name_err,.users_phno_err{display:none}
+.btn.btn-outline.red {
+    border-color: #e7505a;
+    color: #e7505a;
+    background: #d18c13;
+    width: auto;
+    font-size: 12px;
+    padding: 10px;
+    color: #fff;
+}
+.timetable .table thead th {
+    font-size: 15px;
+    color: #272d32;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    vertical-align: middle;
+    padding: 8px 30px;
+    position: relative;
+    background-color: #f8f8f8;
+    border: 1px solid #b5b5b5;
+    text-align: center;
+}
+.timetable .table tbody tr td {
+    font-size: 15px;
+    color: #272d32;
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    padding: 8px 30px;
+    border-top: 0;
+    vertical-align: middle;
+    border: 1px solid #b5b5b5;
+    text-align: center;
+}
+.copied-text{
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translatex(-50%);
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    transition: opacity 0.5s ease-in-out;
+}
 </style>
 <div class="inner-banner">
     <div class="blue-banenr">
@@ -133,17 +70,13 @@
                     <div class="tabing-col">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#courseOverview" role="tab" data-toggle="tab"
-                                    aria-selected="true">
-                                    Course Overview</a>
+                                <a class="nav-link active" href="#courseOverview" role="tab" data-toggle="tab" aria-selected="true">Course Overview</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#syllabus" role="tab" data-toggle="tab" aria-selected="false">
-                                    Syllabus</a>
+                                <a class="nav-link" href="#syllabus" role="tab" data-toggle="tab" aria-selected="false">Syllabus</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#reviews" role="tab" data-toggle="tab" aria-selected="false">
-                                    Participant Reviews</a>
+                                <a class="nav-link" href="#reviews" role="tab" data-toggle="tab" aria-selected="false">Participant Reviews</a>
                             </li>
                         </ul>
                     </div>
@@ -152,10 +85,7 @@
                             <div class="overview-details">
                                 <div class="price-detail-div">
                                     <p><strong>Course Price:</strong> £<?= $course->price; ?></p>
-                                    <p><strong>Location: </strong> <?= $batchSession[0]->session_location; ?>, Location
-                                        City</p>
-                                    <p><strong>Total Duration:</strong> <?= $batchlist->total_hour; ?> hours</p>
-                                    <p><strong>Total Sessions:</strong> <?= $batchlist->total_session; ?> </p>
+                                    <!-- <p><strong>Location: </strong> <?= $batchSession->session_location; ?>, Location City</p> -->
                                     <p><strong>Course Level:</strong>
                                         <?php
                                         $this->load->model('generalmodel');
@@ -164,6 +94,18 @@
                                         $wheredata = $course->course_level;
                                         $queryalllevels = $this->generalmodel->getAllData($table_name, $primary_key, $wheredata, '', '');
                                         echo $queryalllevels[0]->level_title;
+                                        ?>
+                                    </p>
+                                    <p><strong>Course Instructor:</strong>
+                                        <?php
+                                        if($course->userid != '0'){
+                                            $getInsData = $this->db->query("SELECT * FROM na_member WHERE id = '".$course->userid."'")->row();
+                                            if(!empty($getInsData)) {
+                                                echo $getInsData->first_name." ".$getInsData->last_name;
+                                            }
+                                        } else {
+                                            echo "Admin";
+                                        }
                                         ?>
                                     </p>
                                     <p><strong>Delivery Method: </strong> <?php
@@ -176,7 +118,13 @@
                                     ?>
                                     </p>
                                     <p><strong>Certification:</strong> <?php echo $course->certificate; ?></p>
-                                    <p><strong>Course Instructor:</strong> Internet tend to repeat</p>
+                                    <?php
+                                    $getBatchData = $this->db->query("SELECT SUM(total_hour) as total_hour, SUM(total_session) as total_session  FROM sm_batch WHERE courseId = '".$course->course_id."' AND status = '1'")->row();
+                                    //echo "SELECT * FROM sm_course_booking WHERE course_id = '".$course->course_id."' AND student_id = '".$this->session->userdata('loginuserID')."'";
+                                    $getisPurchased = $this->db->query("SELECT * FROM sm_course_booking WHERE course_id = '".$course->course_id."' AND student_id = '".$this->session->userdata('loginuserID')."'")->row();
+                                    ?>
+                                    <p><strong>Total Duration:</strong> <?= $getBatchData->total_hour; ?> hours</p>
+                                    <p><strong>Total Sessions:</strong> <?= $getBatchData->total_session; ?> </p>
                                 </div>
                                 <div class="coursesContent">
                                     <h4>Course Overview:</h4>
@@ -197,40 +145,54 @@
                                                     <th>Time Type</th>
                                                     <th>Session Objective</th>
                                                     <th>Location</th>
+                                                    <?php if(!empty($getisPurchased)) {?>
+                                                    <th>Meeting Code</th>
+                                                    <th>Action</th>
+                                                    <?php } ?>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php $ctb = 1;
+                                                <?php
+                                                $batchData =$this->db->query("SELECT * FROM sm_batch WHERE courseId = '".$course->course_id."'")->result();
+                                                if(!empty($batchData)) {
+                                                $ctb = 1;
+                                                foreach ($batchData as $data) {
+                                                $batchSession = $this->db->query("SELECT * FROM sm_course_sessions WHERE batch_id = '".@$data->batchId."'")->result();
                                                 foreach ($batchSession as $bs) { ?>
-                                                    <tr>
-                                                        <td><?php echo $ctb; ?></td>
-                                                        <td><?php echo $bs->date ?></td>
-                                                        <td><?php echo $bs->starttime ?></td>
-                                                        <td><?php echo $bs->endtime ?></td>
-                                                        <td><?php echo $bs->time_type ?></td>
-                                                        <td><?php echo $bs->session_objective ?></td>
-                                                        <td><?php echo $bs->session_location ?></td>
-                                                    </tr>
-                                                    <?php $ctb++;
-                                                } ?>
+                                                <tr>
+                                                    <td><?php echo $ctb; ?></td>
+                                                    <td><?php echo $bs->date ?></td>
+                                                    <td><?php echo date("h:i A", strtotime($bs->starttime)) ?></td>
+                                                    <td><?php echo date("h:i A", strtotime($bs->endtime)) ?></td>
+                                                    <td><?php echo $bs->time_type ?></td>
+                                                    <td><?php echo $bs->session_objective ?></td>
+                                                    <td>
+                                                        <?php
+                                                        $getCountry = $this->db->query("SELECT * FROM countries WHERE id = '".$bs->session_location."'")->row();
+                                                        echo $getCountry->name;
+                                                        ?>
+                                                    </td>
+                                                    <?php if(!empty($getisPurchased)) {?>
+                                                    <td onclick="copyText(<?= $bs->id?>)" id="meeting-code-<?= $bs->id?>">
+                                                        <?php
+                                                        $getmeetingData = $this->db->query("SELECT * FROM sm_course_instructor WHERE class_date like '%".$bs->date."%'")->row();
+                                                        echo $getmeetingData->meeting_code;
+                                                        ?>
+                                                    </td>
+                                                    <td>
+                                                        <a href="https://adgoogly.com/" class="btn red btn-sm btn-outline sbold uppercase" target="_blank">Join Meeting</a>
+                                                    </td>
+                                                    <?php } ?>
+                                                </tr>
+                                                <?php $ctb++; } } } ?>
                                             </tbody>
                                         </table>
                                     </div>
                                     <div class="tableButton">
-                                        <a href="#" class="button-default">Add to my Basket</a>
-                                        <a href="#" class="button-default">Book Now</a>
-                                    </div>
-                                    <div class="batches-courses">
-                                        <p><strong>Next Level to Progress:</strong> Intermediate</p>
-                                        <p><strong>Other Coming Batches of this Course:</strong></p>
-                                        <ul>
-                                            <li>
-                                                Microsoft Word Foundation 8th June London £150
-                                            </li>
-                                            <li>
-                                                Microsoft Word Foundation 8th June London £150
-                                            </li>
-                                        </ul>
+                                        <!-- <a href="#" class="button-default">Add to my Basket</a> -->
+                                        <?php if(empty($getisPurchased)) {?>
+                                        <a href="<?php echo base_url('courses/payment/'.$course->course_id); ?>" class="button-default">Book Now</a>
+                                        <?php } ?>
                                     </div>
                                     <div class="events-sectionsInn">
                                         <h2>Customers who booked this course also booked following courses:</h2>
@@ -271,10 +233,16 @@
                                                                         </p>
                                                                     </div>
                                                                     <div class="both-bt">
-                                                                        <a href="http://localhost/narrateme/course-module/courses/upcomingcoursedetails/<?php echo $i['course_id']; ?>"
-                                                                            class="button-default orange">Course Details</a>
+                                                                        <a href="http://localhost/narrateme/course-module/courses/upcomingcoursedetails/<?php echo $i['course_id']; ?>" class="button-default orange">Course Details</a>
                                                                         <!-- <a href="<?= base_url(); ?>courses/payment" class="button-default orange">Book Now</a> -->
-                                                                        <a href="#" class="button-default orange">Book Now</a>
+                                                                        <!-- <a href="#" class="button-default orange">Book Now</a> -->
+                                                                        <?php
+                                                                        $getPurchasedCourse = $this->db->query("SELECT * FROM sm_course_booking WHERE course_id = '".$i['course_id']."' AND student_id = '".$this->session->userdata('loginuserID')."'")->row();
+                                                                        if(!empty($getPurchasedCourse)){ ?>
+                                                                        <a href="<?= base_url(); ?>courses/upcomingcoursedetails/<?php echo $i['course_id']; ?>" class="button-default orange">Start Learning</a>
+                                                                        <?php } else { ?>
+                                                                        <a href="<?= base_url(); ?>courses/payment/<?= $i['course_id']; ?>" class="button-default orange">Book Now</a>
+                                                                        <?php } ?>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -303,8 +271,8 @@
                                             </h5>
                                         </div>
                                         <div id="collapseOne<?php echo $ctn; ?>"
-                                            class="collapse<?php if ($ctn == 1) { ?>in<?php } ?>" aria-labelledby="headingOne"
-                                            data-parent="#faqExample" style="">
+                                            class="collapse<?php if ($ctn == 1) { ?>in<?php } ?>"
+                                            aria-labelledby="headingOne" data-parent="#faqExample" style="">
                                             <div class="card-body">
                                                 <?php echo $fa->syllabus_content ?>
                                             </div>
@@ -319,7 +287,8 @@
                                 <div class="reviews-row odd">
                                     <div class="reviews-row-content">
                                         <div class="quote-icon"> <img
-                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt=""></div>
+                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt="">
+                                        </div>
                                         <p>There are many variations of passages of Lorem Ipsum available, but the
                                             majority have suffered alteration in some form, by injected humour, or
                                             randomised words which don't look even slightly believable. If you are going
@@ -337,7 +306,8 @@
                                 <div class="reviews-row even">
                                     <div class="reviews-row-content">
                                         <div class="quote-icon"> <img
-                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt=""></div>
+                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt="">
+                                        </div>
                                         <p>There are many variations of passages of Lorem Ipsum available, but the
                                             majority have suffered alteration in some form, by
                                             injected humour, or randomised words which don't look even slightly
@@ -366,7 +336,8 @@
                                 <div class="reviews-row odd">
                                     <div class="reviews-row-content">
                                         <div class="quote-icon"> <img
-                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt=""></div>
+                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt="">
+                                        </div>
                                         <p>There are many variations of passages of Lorem Ipsum available, but the
                                             majority have suffered alteration in some form, by injected humour, or
                                             randomised words which don't look even slightly believable. If you are going
@@ -384,7 +355,8 @@
                                 <div class="reviews-row even">
                                     <div class="reviews-row-content">
                                         <div class="quote-icon"> <img
-                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt=""></div>
+                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt="">
+                                        </div>
                                         <p>There are many variations of passages of Lorem Ipsum available, but the
                                             majority have suffered alteration in some form, by injected humour, or
                                             randomised words which don't look even slightly believable. If you are going
@@ -402,7 +374,8 @@
                                 <div class="reviews-row odd">
                                     <div class="reviews-row-content">
                                         <div class="quote-icon"> <img
-                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt=""></div>
+                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt="">
+                                        </div>
                                         <p>There are many variations of passages of Lorem Ipsum available, but the
                                             majority have suffered alteration in some form, by injected humour, or
                                             randomised words which don't look even slightly believable. If you are going
@@ -420,7 +393,8 @@
                                 <div class="reviews-row even">
                                     <div class="reviews-row-content">
                                         <div class="quote-icon"> <img
-                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt=""></div>
+                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt="">
+                                        </div>
                                         <p>There are many variations of passages of Lorem Ipsum available, but the
                                             majority have suffered alteration in some form, by injected humour, or
                                             randomised words which don't look even slightly believable. If you are going
@@ -438,7 +412,8 @@
                                 <div class="reviews-row odd">
                                     <div class="reviews-row-content">
                                         <div class="quote-icon"> <img
-                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt=""></div>
+                                                src="<?= base_url(); ?>user_panel/new/images/quote-icon.png" alt="">
+                                        </div>
                                         <p>There are many variations of passages of Lorem Ipsum available, but the
                                             majority have suffered alteration in some form, by injected humour, or
                                             randomised words which don't look even slightly believable. If you are going
@@ -461,3 +436,28 @@
         </div>
     </div>
 </section>
+<script>
+function copyText(count) {
+    var copyText = document.getElementById('meeting-code-' + count).innerText;
+    var textArea = document.createElement("textarea");
+    textArea.value = copyText;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("Copy");
+    document.body.removeChild(textArea);
+
+    var copiedTextDiv = document.createElement('div');
+    copiedTextDiv.className = 'copied-text';
+    copiedTextDiv.innerText = "Copied the text: " + copyText;
+    document.body.appendChild(copiedTextDiv);
+
+    setTimeout(function() {
+        copiedTextDiv.style.opacity = 1;
+    }, 100);
+
+    setTimeout(function() {
+        copiedTextDiv.style.opacity = 0;
+        document.body.removeChild(copiedTextDiv);
+    }, 3000);
+}
+</script>

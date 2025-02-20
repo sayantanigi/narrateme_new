@@ -754,8 +754,9 @@ class Batch extends CI_Controller
 		$this->session->set_flashdata('success', 'Data Deleted Successfully');
 		redirect($_SERVER['HTTP_REFERER']);
 	}
-	public function edit() {
-        $batch_id = $this->input->post('batch_id');
+	public function edit()
+	{
+		$batch_id = $this->input->post('batch_id');
 		$this->generalmodel->show_data_id('sm_course_sessions', $batch_id, 'batch_id', 'delete', '');
 		$table_name = 'sm_batch';
 		$id = $this->input->post('batch_id');
@@ -771,8 +772,8 @@ class Batch extends CI_Controller
 		$this->generalmodel->show_data_id($table_name, $id, $fieldname, $action, $datalist);
 		$batchId = $this->input->post('batch_id');
 		$date = $this->input->post('date');
-		$startTime = $this->input->post('starttime');
-		$endTime = $this->input->post('endtime');
+		$startTime = $this->input->post('startTime');
+		$endTime = $this->input->post('endTime');
 		$time_type = $this->input->post('time_type');
 		$session_objective = $this->input->post('session_objective');
 		$session_location = $this->input->post('session_location');

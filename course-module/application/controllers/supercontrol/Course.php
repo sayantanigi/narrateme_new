@@ -671,7 +671,8 @@ class Course extends CI_Controller {
 	public function add_course_session_view() {
 		$id = end($this->uri->segment_array());
 		$data['categories'] = $this->generalmodel->getCategories();
-		$data['locations'] = $this->generalmodel->getlocations();
+		//$data['locations'] = $this->generalmodel->getlocations();
+        $data['locations'] = $this->db->query("SELECT * FROM countries")->result();
 		$data['title'] = "Add Course Syllabus";
 		$this->load->view('supercontrol/header', $data);
 		$this->load->view('supercontrol/batchadd_view', $data);
@@ -778,16 +779,33 @@ class Course extends CI_Controller {
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 	public function course_session_list() {
-		echo $id = end($this->uri->segment_array());
+		$id = end($this->uri->segment_array());
 		$data['batchlist'] = $this->db->get_where('sm_batch', array('courseId' => $id))->result();
-		$batchId = $data['batchlist'][0]->batchId;
-		$data['batchSession'] = $this->db->get_where('sm_course_sessions', array('batch_id' => $batchId))->result();
-		$data['locations'] = $this->generalmodel->getlocations();
+		//$batchId = $data['batchlist'][0]->batchId;
+		//$data['batchSession'] = $this->db->get_where('sm_course_sessions', array('batch_id' => $batchId))->result();
+		//$data['locations'] = $this->generalmodel->getlocations();
 		$data['title'] = "Course Syllabus List";
 		$this->load->view('supercontrol/header', $data);
 		$this->load->view('supercontrol/showcoursesessionlist', $data);
 		$this->load->view('supercontrol/footer', $data);
 	}
+    public function get_time_table() {
+        $batch_id = $this->input->post('id');
+        $getTimeTable = $this->db->query("SELECT * FROM sm_course_sessions WHERE batch_id = '".$batch_id."'")->result();
+        if(!empty($getTimeTable)) {
+            $ctn = 1;
+            $html = '';
+            foreach ($getTimeTable as $data) {
+                $html .= '<tr class="table table-striped table-bordered table-hover table-checkable order-column dt-responsive" id="sample_1"><td>'.$ctn.'</td><td style="max-width:200px;">'.$data->date.'</td><td style="max-width:200px;">'.date('g:i A', strtotime($data->starttime)).'</td><td style="max-width:200px;">'.date('g:i A', strtotime($data->endtime)).'</td><td style="max-width:200px;">'.$data->time_type.'</td><td style="max-width:200px;">'.$data->session_objective.'</td><td style="max-width:200px;">';
+                $queryalllevels = $this->db->query("SELECT * FROM countries WHERE id = '".$data->session_location."'")->row();
+                $html .= $queryalllevels->name.'</td></tr>';
+                $ctn++;
+            }
+            echo $html;
+        } else {
+            echo 'No data found';
+        }
+    }
 	public function session_view() {
 		$table_name = 'sm_batch';
 		$primary_key = '';
@@ -803,17 +821,49 @@ class Course extends CI_Controller {
 	}
 	public function edit_coursesession_view() {
 		$id = $this->uri->segment(4);
-		$data['lessdetails'] = $this->generalmodel->fetch_all_join("Select * from sm_batch where batchId='$id'");
-		$data['batchSessionlist'] = $session_list = $this->db->get_where('sm_course_sessions', array('batch_id' => $id))->result();
-		$data['categories'] = $this->generalmodel->getCategories();
-		$data['locations'] = $this->generalmodel->getlocations();
-		$data['cites'] = $this->generalmodel->getCities();
-		$data['levels'] = $this->generalmodel->getlevel();
-		$data['modes'] = $this->generalmodel->getMode();
+		$data['lessdetails'] = $this->db->query("SELECT * FROM sm_batch WHERE batchId = '".$id."'")->result();
+        $data['batchSessionlist'] = $session_list = $this->db->get_where('sm_course_sessions', array('batch_id' => $id))->result();
+        //echo "<pre>"; print_r($data['batchSessionlist']); die();
+		// $data['categories'] = $this->generalmodel->getCategories();
+		$data['locations'] = $this->db->query("SELECT * FROM countries")->result();
+		// $data['cites'] = $this->generalmodel->getCities();
+		// $data['levels'] = $this->generalmodel->getlevel();
+		// $data['modes'] = $this->generalmodel->getMode();
 		$data['title'] = "Edit Course Session";
 		$this->load->view('supercontrol/header', $data);
 		$this->load->view('supercontrol/editcoursesession', $data);
 		$this->load->view('supercontrol/footer', $data);
 	}
+    public function delete_coursesession($id){
+        $getSession = $this->db->query("SELECT * FROM sm_course_sessions WHERE batch_id = '".$id."'")->result();
+        if(!empty($getSession)) {
+            $this->db->where('batch_id', $id);
+            $result = $this->db->delete('sm_course_sessions');
+            if ($result) {
+                $this->db->where('batchId', $id);
+                $result1 = $this->db->delete('sm_batch');
+                if ($result1) {
+                    $this->session->set_flashdata('success', 'Course Session deleted successfully');
+                    redirect($_SERVER['HTTP_REFERER']);
+                } else {
+                    $this->session->set_flashdata('error', 'Course Session not deleted');
+                redirect($_SERVER['HTTP_REFERER']);
+                }
+            } else {
+                $this->session->set_flashdata('error', 'Course Session not deleted');
+                redirect($_SERVER['HTTP_REFERER']);
+            }
+        } else {
+            $this->db->where('batchId', $id);
+            $result = $this->db->delete('sm_batch');
+            if ($result) {
+                $this->session->set_flashdata('success', 'Course Session deleted successfully');
+                redirect($_SERVER['HTTP_REFERER']);
+            } else {
+                $this->session->set_flashdata('error', 'Course Session not deleted');
+            redirect($_SERVER['HTTP_REFERER']);
+            }
+        }
+    }
 }
 ?>

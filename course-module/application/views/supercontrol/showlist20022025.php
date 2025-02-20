@@ -9,12 +9,12 @@
 	padding: 8px;
 	}
 #sample_1_info{
-	padding: 8px;
+	padding: 8px;	
 	}
 #sample_1_paginate{
 	float: right;
     padding: 8px;
-	}
+	}	
 </style>
 <div class="page-container">
   <!-- BEGIN SIDEBAR -->
@@ -62,9 +62,9 @@
       <?php if(@$success_msg){echo @$success_msg;}?>
 	   <?php if(@$message){echo @$message;}?>
 	     <?php if(@$msg){echo @$msg;}?>
-		    <?php if(@$msg1){echo @$msg1;}?>
+		    <?php if(@$msg1){echo @$msg1;}?> 
 			<?php if($this->session->flashdata('success_delete')!=''){?><div class="alert alert-success text-center"><?php echo $this->session->flashdata('success_delete');?></div><?php }?>
-
+			
       <div class="row">
         <div class="col-md-12">
           <div class="tabbable-line boxless tabbable-reversed">
@@ -75,10 +75,10 @@
                     <div class="caption"> <i class="fa fa-gift"></i>Booking list </div>
                     <div class="tools"> <a href="javascript:;" class="collapse"> </a>  <a href="javascript:;" class="reload"> </a> <a href="javascript:;" class="remove"> </a> </div>
                   </div>
-
+                  
                   <div class="portlet-body form">
                   <button class="btn btn-warning btn-sm pull-right" id="del_all" style="padding:5px; margin:8px;" onclick="return confirm('Are you sure about this delete?');">Delete selected</button>
-
+                  
                     <!-- BEGIN FORM-->
                     <table class="table table-striped table-bordered table-hover table-checkable order-column dt-responsive" id="sample_1">
                     <div id="mydiv">
@@ -106,11 +106,7 @@
                           </td>
                           <td><?php echo $i->book_id;?></td>
                           <td  style="max-width:200px;"><?php echo $i->course_name;?></td>
-                          <td  style="max-width:200px;">
-                            <?php
-                            $getStudentData = $this->db->query("SELECT * FROM na_member WHERE id = '".$i->student_id."'")->row();
-                            echo $getStudentData->fullname;?>
-                        </td>
+                          <td  style="max-width:200px;"><?php echo $i->student_id;?></td>
                           <td  style="max-width:250px;"><div class="form-group">
                               <div class="col-md-5">
                                 <select name="blog_status" id="stachange" onchange="f1(this.value,<?php echo $i->id ;?>)" style="padding:4px;">
@@ -122,10 +118,10 @@
                             </div></td>
                             <td><?php echo $i->book_date;?></td>
                             <td style="max-width:50px;"><a class="btn green btn-sm btn-outline sbold uppercase" href="<?php echo base_url()?>supercontrol/paid/view_blog/<?php echo $i->book_id; ?>">View</a></td>
-
+                         
                           <td style="max-width:50px;"><a class="btn red btn-sm btn-outline sbold uppercase" onclick="return confirm('Are you sure about this delete?');" href="<?php echo base_url()?>supercontrol/paid/delete_blog/<?php echo $i->book_id; ?>">Delete</a></td>
                         </tr>
-
+                        
                         <?php $ctn++;}?>
                         <?php endif; ?>
                       </tbody>
@@ -175,7 +171,7 @@
 //                    return  false;
 					 //alert ("<?php echo base_url() ?>supercontrol/controllers/blog/delete_multiple");
                     $.ajax({
-
+						  
                         url: '<?php echo base_url() ?>supercontrol/paid/delete_multiple',
                         type: 'post',
                         data: 'ids=' + checkValues
@@ -187,10 +183,10 @@
                         $('#selectall').attr('checked', false);
                     });
                 });
-
+                 
                 function  resetcheckbox(){
                 $('input:checkbox').each(function() { //loop through each checkbox
-                this.checked = false; //deselect all checkboxes with class "checkbox1"
+                this.checked = false; //deselect all checkboxes with class "checkbox1"                      
                    });
                 }
             });

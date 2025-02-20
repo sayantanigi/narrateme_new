@@ -1,6 +1,6 @@
 <?php
 include('application_top.php');
-$baseurl = 'http://localhost/narrateme/';
+$baseurl = 'https://projects.goigi.biz/narrateme/';
 //$_SESSION["user_log_flag"] = 0; //login false
 if (isset($_POST['login'])) {
     extract($_POST);
@@ -112,7 +112,7 @@ if (@$_SESSION['user_log_flag'] == 1) {
                                     <li><a href="page.php?id=22">Instructional Facilities &amp; Schools</a></li>
                                     <li><a href="product_list.php">Products</a></li>
                                     <?php if (@$viewmember['std'] == 1) { ?>
-                                    <li><a href="http://localhost/narrateme/course-module/courses/<?= base64_encode($_SESSION["userid"])?>">Courses</a></li>
+                                    <li><a href="https://projects.goigi.biz/narrateme/course-module/courses">Courses</a></li>
                                     <?php } else { ?>
                                     <li><a href="#" class="link-foo-ha" onClick="$('#Login-area').modal('show');return false;" style="margin-right: 0px;">Courses</a></li>
                                     <?php } ?>

@@ -72,6 +72,7 @@
         min-width: 47%;
         font-size: 18px;
         padding: 10px 6px 13px 6px;
+        float: left;
     }
 
     .price-view span {
@@ -221,9 +222,9 @@ $content = $this->generalmodel->show_data_id("sm_page_content", 3, "id", "get", 
                             foreach ($eloca as $i) { ?>
                                 <li>
                                     <div class="list-box">
-                                        <figure><img
-                                                src="<?php echo base_url() ?>uploads/courseimage/<?php echo $i->course_image ?>"
-                                                alt=""></figure>
+                                        <figure>
+                                            <img src="<?php echo base_url() ?>uploads/courseimage/<?php echo $i->course_image ?>" alt="">
+                                        </figure>
                                         <div class="all-content">
                                             <div class="hd-bt clearfix">
                                                 <h3><?php echo $i->course_name; ?></h3>
@@ -231,10 +232,10 @@ $content = $this->generalmodel->show_data_id("sm_page_content", 3, "id", "get", 
                                             <div class="price-view">
                                                 <span style="margin-left: 5px;">Price $<?php echo $i->price; ?></span>
                                                 <span class="name-bt" style="margin-right: 5px;">
-                                                    <?php
-                                                    $queryallcat = $this->db->query("SELECT * FROM sm_category WHERE category_id = '" . $i->course_category . "'")->row();
-                                                    echo $category_name = $queryallcat->category_name;
-                                                    ?>
+                                                <?php
+                                                $queryallcat = $this->db->query("SELECT * FROM sm_category WHERE category_id = '" . $i->course_category . "'")->row();
+                                                echo $category_name = $queryallcat->category_name;
+                                                ?>
                                                 </span>
                                             </div>
                                             <div class="contentView">
@@ -242,10 +243,14 @@ $content = $this->generalmodel->show_data_id("sm_page_content", 3, "id", "get", 
                                                     <?php echo date('jS M `y', strtotime($i->course_endDate)); ?></p>
                                             </div>
                                             <div class="both-bt">
-                                                <a href="http://localhost/narrateme/course-module/courses/upcomingcoursedetails/<?php echo $i->course_id; ?>"
-                                                    class="button-default orange">Course Details</a>
-                                                <!-- <a href="<?= base_url(); ?>courses/payment" class="button-default orange">Book Now</a> -->
-                                                <a href="#" class="button-default orange">Book Now</a>
+                                                <a href="<?= base_url(); ?>courses/upcomingcoursedetails/<?php echo $i->course_id; ?>" class="button-default orange">Course Details</a>
+                                                <?php
+                                                $getPurchasedCourse = $this->db->query("SELECT * FROM sm_course_booking WHERE course_id = '".$i->course_id."' AND student_id = '".$this->session->userdata('loginuserID')."'")->row();
+                                                if(!empty($getPurchasedCourse)){ ?>
+                                                <a href="<?= base_url(); ?>courses/upcomingcoursedetails/<?php echo $i->course_id; ?>" class="button-default orange">Start Learning</a>
+                                                <?php } else { ?>
+                                                <a href="<?= base_url(); ?>courses/payment/<?= $i->course_id; ?>" class="button-default orange">Book Now</a>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>

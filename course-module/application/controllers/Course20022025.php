@@ -1,6 +1,7 @@
 <?php if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 error_reporting(0);
+
 class Course extends CI_Controller
 {
 	function __construct()
@@ -20,20 +21,26 @@ class Course extends CI_Controller
 		$this->load->view('category', $data);
 		$this->load->view('footer');
 	}
+
 	public function coursedescription()
 	{
 		$wheredata = $this->uri->segment(3);
 		$querycrs = $this->generalmodel->getAllData('sm_course', 'course_id', $wheredata = $this->uri->segment(3), '', '', '');
+
 		$data['querycrs'] = $querycrs;
+
 		$wheredata = $this->uri->segment(3);
 		$querydesc = $this->generalmodel->getAllDataOrder('sm_syllabus', 'course_id', $wheredata, 's_order', '', '', '');
 		$data['querydesc'] = $querydesc;
+
 		$data['settings'] = $this->generalmodel->show_data_id("sm_settings", 1, "id", "get", "");
+
 		$data['title'] = 'Course Details';
 		$this->load->view('header', $data);
 		$this->load->view('coursedetails');
 		$this->load->view('footer');
 	}
+
 	public function modeincourse()
 	{
 		$data['title'] = 'Course Modes';
@@ -47,11 +54,13 @@ class Course extends CI_Controller
 		//print_r($session);die;
 		$data['price'] = $batchlist->price;
 		$wheredata = $this->uri->segment(3);
+
 		$querycourse = $this->generalmodel->getAllData($table_name, $primary_key, $wheredata, '', '', '');
 		$data['course'] = $this->db->get_where('sm_course', array('course_id' => $courseId))->row();
 		$data['coursename'] = $querycourse[0]->course_name;
 		// $data['price'] = $querycourse[0]->price;
 		$data['cource_hours'] = @$querycourse[0]->cource_hours;
+
 		//echo $this->db->last_query();
 		@$type = @$this->input->post('type');
 		@$course_id = @$this->input->post('course_id');
@@ -60,6 +69,7 @@ class Course extends CI_Controller
 		@$end_date = @$this->input->post('end_date');
 		$this->session->set_userdata('location', $location);
 		if (@$type != '' and $course_id != '') {
+
 			$table_name = 'sm_course_location';
 			$primary_key1 = 'course_type';
 			$wheredata1 = $type;
@@ -76,16 +86,22 @@ class Course extends CI_Controller
 			$wheredata2 = $course_id;
 			$querylesson = $this->generalmodel->Get_multiple_where_data($table_name, $primary_key1, $primary_key2, $wheredata1, $wheredata2, '', '', '');
 			$data['lesson'] = $querylesson;
+
+
 		}
+
 		if (@$type != '' and @$course_id != '' and @$location != '') {
 			$table_name = 'sm_course_start_date';
 			$primary_key = 'loc_id';
 			$wheredata = $location;
 			$queryloctime = $this->generalmodel->getAllData($table_name, $primary_key, $wheredata, '', '', '');
 			//echo $this->db->last_query();
+
 			$data['loc'] = $location;
 			$data['start'] = $queryloctime;
+
 		}
+
 		if (@$type != '' and @$course_id != '' and @$location != '' and @$start_date != '') {
 			//echo "aa"; exit();
 			$table_name = 'sm_course_end_date';
@@ -93,16 +109,22 @@ class Course extends CI_Controller
 			$wheredata = $start_date;
 			$queryloctime = $this->generalmodel->getAllData($table_name, $primary_key, $wheredata, '', '', '');
 			//echo $this->db->last_query();
+
 			$data['loc'] = $location;
 			$data['start_date'] = $start_date;
 			$data['end_date'] = $end_date;
 			$data['end'] = $queryloctime;
+
 		}
+
+
 		$data['settings'] = $this->generalmodel->show_data_id("sm_settings", 1, "id", "get", "");
+
 		$this->load->view('header', $data);
 		$this->load->view('modeincourse');
 		$this->load->view('footer');
 	}
+
 	public function distancecourse()
 	{
 		$data['title'] = 'Distance Booking';
@@ -127,6 +149,7 @@ class Course extends CI_Controller
 		$this->load->view('distancebooking');
 		$this->load->view('footer');
 	}
+
 	public function privatecourse()
 	{
 		$data['title'] = 'Private Booking';
@@ -144,6 +167,7 @@ class Course extends CI_Controller
 		$queryloctime = $this->generalmodel->getAllData($table_name, $primary_key, $wheredata, '', '', '');
 		//echo $this->db->last_query();exit();
 		$data['plearning'] = $queryloctime;
+
 		//===================Get Course Details==================
 		if (!empty($queryloctime)) {
 			$table_name = 'sm_course';
@@ -160,6 +184,7 @@ class Course extends CI_Controller
 		$this->load->view('privatebooking');
 		$this->load->view('footer');
 	}
+
 	public function flexiblecourse()
 	{
 		$table_name = 'sm_course';
@@ -168,20 +193,25 @@ class Course extends CI_Controller
 		$batchId = $this->uri->segment(5);
 		$wheredata = $this->uri->segment(3);
 		$querycourse = $this->generalmodel->getAllData($table_name, $primary_key, $wheredata, '', '', '');
+
 		$data['coursename'] = $querycourse[0]->course_name;
 		$data['price'] = $querycourse[0]->price;
 		$data['cource_hours'] = @$querycourse[0]->cource_hours;
+
 		$data['title'] = 'Flexible Booking';
 		$data['course'] = $this->db->get_where('sm_course', array('course_id' => $courseId))->row();
+
 		$data['batchlist'] = $batchlist = $this->db->get_where('sm_batch', array('courseId' => $courseId, 'batchId' => $batchId))->row();
 		$data['batchSession'] = $session = $this->db->get_where('sm_batch_sessions', array('batch_id' => $batchId))->result();
 		//===================Get Course Details==================
+
 		$table_name = 'sm_course_lesion';
 		$primary_key1 = 'type_id';
 		$wheredata1 = 'ev';
 		$primary_key2 = 'course_id';
 		$wheredata2 = $this->uri->segment(3);
 		$querylesson = $this->generalmodel->Get_multiple_where_data($table_name, '', $primary_key2, '', $wheredata2, '', '', '');
+
 		//echo $this->db->last_query(); exit;
 		$data['lesson'] = $querylesson;
 		//================= settings===============
@@ -198,19 +228,26 @@ class Course extends CI_Controller
 		$wheredata = $this->uri->segment(3);
 		$querycourse = $this->generalmodel->getAllData('sm_course_feedback', $primary_key, $wheredata, '', '', '');
 		$data['querycourse'] = $querycourse;
+
+
 		//================= settings===============
 		$data['settings'] = $this->generalmodel->show_data_id("sm_settings", 1, "id", "get", "");
+
 		$this->load->view('headerinner', $data);
 		$this->load->view('reviewlist');
 		$this->load->view('footer');
 	}
+
 	public function payment()
 	{
 		// $this->session->userdata('is_userlogged_in');
+
 		$id = $this->session->userdata('is_userlogged_in');
 		$usertype = $this->generalmodel->fetch_single_join("SELECT user_type from  sm_member where email='$id'");
 		$type = $usertype->user_type;
+
 		//	echo $type;  exit();
+
 		if (!$this->session->userdata('is_user_id')) {
 			$this->session->set_flashdata('msg', '<div class="alert alert-danger text-center">Please Login for  book a course! </div>');
 			redirect('auth/login', 'refresh');
@@ -220,6 +257,9 @@ class Course extends CI_Controller
 			//redirect($_SERVER['HTTP_REFERER'],'');
 			redirect('auth/login', 'refresh');
 		} else {
+
+
+
 			$transaction_id = 'OESPAY' . random_string('alnum', 12) . date('d-m-Y');
 			$member_id = $this->session->userdata('is_userlogged_in');
 			//===========Insert in to booking table=================
@@ -236,7 +276,9 @@ class Course extends CI_Controller
 				'status' => '0'
 			);
 			//print_r($data);
+
 			$details = $this->generalmodel->show_data_id('sm_course_booking', '', '', 'insert', $data);
+
 			//==============Insert in to payment table==================
 			$datapay = array(
 				'transaction_id' => $transaction_id,
@@ -248,12 +290,14 @@ class Course extends CI_Controller
 			$details = $this->generalmodel->show_data_id('sm_payment', '', '', 'insert', $datapay);
 			//=============Insert in to payment table========
 			//$member_id
+
 			$data['title'] = 'Payment';
 			$this->load->view('header', $data);
 			$this->load->view('payment');
 			$this->load->view('footer');
 		}
 	}
+
 	public function Events()
 	{
 		$data['title'] = "Events";
@@ -262,8 +306,11 @@ class Course extends CI_Controller
 		$wheredata = $this->uri->segment(3);
 		$querycourse = $this->generalmodel->getAllData('sm_course_feedback', $primary_key, $wheredata, '', '', '');
 		$data['querycourse'] = $querycourse;
+
+
 		//================= settings===============
 		$data['settings'] = $this->generalmodel->show_data_id("sm_settings", 1, "id", "get", "");
+
 		$this->load->view('header', $data);
 		$this->load->view('events');
 		$this->load->view('footer');
@@ -276,12 +323,16 @@ class Course extends CI_Controller
 		$wheredata = $this->uri->segment(3);
 		$querycourse = $this->generalmodel->getAllData('sm_course_feedback', $primary_key, $wheredata, '', '', '');
 		$data['querycourse'] = $querycourse;
+
+
 		//================= settings===============
 		$data['settings'] = $this->generalmodel->show_data_id("sm_settings", 1, "id", "get", "");
+
 		$this->load->view('header', $data);
 		$this->load->view('event-register');
 		$this->load->view('footer');
 	}
+
 	public function eventdetails()
 	{
 		$data['title'] = "Event Details";
@@ -291,10 +342,12 @@ class Course extends CI_Controller
 		$querycourse = $this->generalmodel->getAllData('sm_course_feedback', $primary_key, $wheredata, '', '', '');
 		$data['querycourse'] = $querycourse;
 		$data['settings'] = $this->generalmodel->show_data_id("sm_settings", 1, "id", "get", "");
+
 		$this->load->view('header', $data);
 		$this->load->view('event-details');
 		$this->load->view('footer');
 	}
+
 	public function corporatetraining()
 	{
 		$data['title'] = "Corporate Training";
@@ -304,19 +357,26 @@ class Course extends CI_Controller
 		$querycourse = $this->generalmodel->getAllData('sm_course_feedback', $primary_key, $wheredata, '', '', '');
 		$data['querycourse'] = $querycourse;
 		$data['settings'] = $this->generalmodel->show_data_id("sm_settings", 1, "id", "get", "");
+
 		$this->load->view('header', $data);
 		$this->load->view('corporatetraining');
 		$this->load->view('footer');
 	}
+
 	public function privatetutor()
 	{
 		$data['title'] = "Private Tutor";
 		$data['settings'] = $this->generalmodel->show_data_id("sm_settings", 1, "id", "get", "");
 		$data['content'] = $this->generalmodel->show_data_id("sm_page_content", 4, "id", "get", "");
 		$data['contents'] = $this->generalmodel->show_data_id("sm_page_content", 5, "id", "get", "");
+
 		$this->load->view('header', $data);
 		$this->load->view('private_tutor');
 		$this->load->view('footer');
 	}
+
+
+
 }
+
 ?>
