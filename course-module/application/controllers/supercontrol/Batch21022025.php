@@ -41,18 +41,18 @@ class Batch extends CI_Controller
 		$this->load->view('supercontrol/batchadd_view');
 		$this->load->view('supercontrol/footer');
 	}
-	function add() {
+	function add()
+	{
 		$this->form_validation->set_rules('total_session', 'Total session', 'required');
 		$this->form_validation->set_rules('total_hour', 'Total hour', 'required');
 		if ($this->form_validation->run() == TRUE) {
-            $data = array(
+			$data = array(
 				'courseId' => $this->input->post('courseId'),
 				'total_session' => $this->input->post('total_session'),
 				'total_hour' => $this->input->post('total_hour'),
 				'created' => date('Y-m-d H:i:s'),
 				'status' => 1
 			);
-            //echo "<pre>"; print_r($data); die();
 			$table_name = 'sm_batch';
 			$insertId = $this->generalmodel->insert_data($table_name, $data);
 			$date = $this->input->post('date');
@@ -146,7 +146,8 @@ class Batch extends CI_Controller
 		$this->load->view('supercontrol/showbatchlocationlist', $data);
 		$this->load->view('supercontrol/footer');
 	}
-	function add_instructor() {
+	function add_instructor()
+	{
 		$queryinst = $this->instructor_model->show_member();
 		$data['inst'] = $queryinst;
 		$querycourse = $this->instructor_model->show_course();
@@ -158,52 +159,22 @@ class Batch extends CI_Controller
 		$this->load->view('supercontrol/instructoradd_view');
 		$this->load->view('supercontrol/footer');
 	}
-    function getSessionDate() {
-        $course_id = $_POST['course_id'];
-        $getbatchData = $this->db->query("SELECT GROUP_CONCAT(batchId) as batchId FROM sm_batch WHERE courseId = '".$course_id."' AND status = '1'")->row();
-        if(!empty($getbatchData->batchId)) {
-            $html = '<option value="">Select Class Date</option>';
-            $getSessionDate = $this->db->query("SELECT * FROM sm_course_sessions WHERE batch_id IN (".$getbatchData->batchId.") GROUP BY date")->result();
-            foreach ($getSessionDate as $session) {
-                $html .= '<option value="'.$session->date.'">'.$session->date.'</option>';
-            }
-            echo $html;
-        } else {
-            echo '<option value="">No sessions date available</option>';
-        }
-    }
-
-    function getBatchID() {
-        $course_id = $_POST['course_id'];
-    }
-
-    function getSessionTime() {
-        $date = $_POST['date'];
-        $getSessionTime = $this->db->query("SELECT * FROM sm_course_sessions WHERE date = '".$date."'")->result();
-        if (!empty($getSessionTime)) {
-            echo json_encode($getSessionTime);
-        } else {
-            echo json_encode([]);
-        }
-    }
-
-	/*public function add_course_instructor() {
-		$table_name = 'sm_course_instructor';
-		$data = array(
-			'course_id' => $this->input->post('course_idd'),
-			'instructor_id' => $this->input->post('instructor_id'),
-			'mode_id' => $this->input->post('mode_id'),
-			'class_date' => date('Y-m-d', strtotime($this->input->post('class_date'))),
-			'start_time' => date('H:i:s', strtotime($this->input->post('start_time'))),
-			'end_time' => date('H:i:s', strtotime($this->input->post('end_time'))),
-			'status' => '1'
-		);
-		$this->generalmodel->insert_data($table_name, $data);
-		$this->session->set_flashdata('success', 'Data Added Successfully');
-		//redirect($_SERVER['HTTP_REFERER']);
-        redirect('supercontrol/course/instructor_list', TRUE);
-	}*/
-
+	// public function add_course_instructor() {
+	// 	$table_name = 'sm_course_instructor';
+	// 	$data = array(
+	// 		'course_id' => $this->input->post('course_idd'),
+	// 		'instructor_id' => $this->input->post('instructor_id'),
+	// 		'mode_id' => $this->input->post('mode_id'),
+	// 		'class_date' => date('Y-m-d', strtotime($this->input->post('class_date'))),
+	// 		'start_time' => date('H:i:s', strtotime($this->input->post('start_time'))),
+	// 		'end_time' => date('H:i:s', strtotime($this->input->post('end_time'))),
+	// 		'status' => '1'
+	// 	);
+	// 	$this->generalmodel->insert_data($table_name, $data);
+	// 	$this->session->set_flashdata('success', 'Data Added Successfully');
+	// 	//redirect($_SERVER['HTTP_REFERER']);
+    //     redirect('supercontrol/course/instructor_list', TRUE);
+	// }
     public function add_course_instructor() {
 		$table_name = 'sm_course_instructor';
         $getinsData = $this->db->query("SELECT * FROM na_member WHERE id = '".$this->input->post('instructor_id')."'")->row();

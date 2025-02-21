@@ -153,11 +153,11 @@
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                $batchData =$this->db->query("SELECT GROUP_CONCAT(batchId) AS batchId FROM sm_batch WHERE courseId = '".$course->course_id."'")->row();
-                                                if(!empty($batchData->batchId)) {
+                                                $batchData =$this->db->query("SELECT * FROM sm_batch WHERE courseId = '".$course->course_id."'")->result();
+                                                if(!empty($batchData)) {
                                                 $ctb = 1;
-                                                $batchSession = $this->db->query("SELECT * FROM sm_course_sessions WHERE batch_id IN (".$batchData->batchId.")")->result();
-                                                if(!empty($batchSession)){
+                                                foreach ($batchData as $data) {
+                                                $batchSession = $this->db->query("SELECT * FROM sm_course_sessions WHERE batch_id = '".@$data->batchId."'")->result();
                                                 foreach ($batchSession as $bs) { ?>
                                                 <tr>
                                                     <td><?php echo $ctb; ?></td>
@@ -172,10 +172,10 @@
                                                         echo $getCountry->name;
                                                         ?>
                                                     </td>
-                                                    <?php if(!empty($getisPurchased)) { ?>
+                                                    <?php if(!empty($getisPurchased)) {?>
                                                     <td onclick="copyText(<?= $bs->id?>)" id="meeting-code-<?= $bs->id?>">
                                                         <?php
-                                                        $getmeetingData = $this->db->query("SELECT * FROM sm_course_instructor WHERE course_id = '".$course->course_id."' AND class_date like '%".$bs->date."%' AND start_time = '".$bs->starttime."' AND end_time = '".$bs->endtime."'")->row();
+                                                        $getmeetingData = $this->db->query("SELECT * FROM sm_course_instructor WHERE class_date like '%".$bs->date."%'")->row();
                                                         echo $getmeetingData->meeting_code;
                                                         ?>
                                                     </td>
@@ -184,7 +184,7 @@
                                                     </td>
                                                     <?php } ?>
                                                 </tr>
-                                                <?php $ctb++; } } }?>
+                                                <?php $ctb++; } } } ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -233,7 +233,7 @@
                                                                         </p>
                                                                     </div>
                                                                     <div class="both-bt">
-                                                                        <a href="http://localhost/narrateme/course-module/courses/upcomingcoursedetails/<?php echo $i['course_id']; ?>" class="button-default orange">Course Details</a>
+                                                                        <a href="<?= base_url(); ?>courses/upcomingcoursedetails/<?php echo $i['course_id']; ?>" class="button-default orange">Course Details</a>
                                                                         <!-- <a href="<?= base_url(); ?>courses/payment" class="button-default orange">Book Now</a> -->
                                                                         <!-- <a href="#" class="button-default orange">Book Now</a> -->
                                                                         <?php

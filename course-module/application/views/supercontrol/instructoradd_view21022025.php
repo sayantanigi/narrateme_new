@@ -11,7 +11,7 @@
             <div class="page-bar">
                 <ul class="page-breadcrumb">
                     <li><a href="<?php echo base_url(); ?>supercontrol/home">Home</a> <i class="fa fa-circle"></i></li>
-                    <li><span>Supercontrol panel</span></li>
+                    <li><span>supercontrol panel</span></li>
                 </ul>
             </div>
             <?php if ($this->session->flashdata('success') != '') { ?>
@@ -47,62 +47,65 @@
                                         <form action="<?php echo base_url().'supercontrol/batch/add_course_instructor' ?>" class="form-horizontal form-bordered" method="post" enctype="multipart/form-data">
                                             <div class="form-body">
                                                 <div class="form-group">
-                                                    <b><label class="col-md-3 control-label">Select Course <span style="color: red;">*</span></label></b>
+                                                    <b><label class="col-md-3 control-label">Select Course </label></b>
                                                     <div class="col-md-8">
-                                                        <select name="course_idd" id="course_idd" class="form-control" required>
+                                                        <select name="course_idd" class="form-control">
                                                             <option value=''>Select Course</option>
                                                             <?php foreach ($course as $c) { ?>
                                                             <option value="<?php echo $c->course_id ?>"><?php echo $c->course_name; ?></option>
                                                             <?php } ?>
                                                         </select>
+                                                        <label id="errorBox"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <b><label class="col-md-3 control-label">Select Instructor <span style="color: red;">*</span></label></b>
                                                     <div class="col-md-8">
+                                                        <!-- <select name="instructor_id" class="form-control">
+                                                            <option value=''>Select Instructor</option>
+                                                            <?php foreach ($inst as $ac) { ?>
+                                                            <option value="<?php echo $ac->member_id ?>"><?php echo $ac->first_name . " " . $ac->last_name; ?></option>
+                                                            <?php } ?>
+                                                        </select> -->
                                                         <?php
                                                         $getUserData = $this->db->query("SELECT * FROM na_member WHERE id = '".$this->session->userdata('userid')."'")->row();
                                                         ?>
                                                         <input type="text" class="form-control" value="<?= $getUserData->prefixname." ".$getUserData->first_name." ".$getUserData->last_name?>" readonly>
                                                         <input type="hidden" name="instructor_id" value="<?= $this->session->userdata('userid')?>">
+                                                        <label id="errorBox"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <b><label class="col-md-3 control-label">Select Mode <span style="color: red;">*</span></label></b>
                                                     <div class="col-md-8">
-                                                        <select name="mode_id" class="form-control" required>
-                                                            <option value=''>Select Mode</option>
-                                                            <?php foreach ($mode as $m) { ?>
+                                                        <select name="mode_id" class="form-control">
+                                                            <option value='' >Select Mode</option>
+                                                        <?php foreach ($mode as $m) { ?>
                                                             <option value="<?php echo $m->id ?>"> <?php echo $m->mode_title; ?></option>
-                                                            <?php } ?>
+                                                        <?php } ?>
                                                         </select>
+                                                        <label id="errorBox"></label>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-md-3">Class Date <span style="color: red;">*</span></label>
+                                                    <label class="control-label col-md-3">Class Date</label>
                                                     <div class="col-md-8">
-                                                        <?php //echo form_input(array('id' => 'datetimepicker2', 'name' => 'class_date', 'type' => 'text', 'class' => 'form-control', 'required' => 'required')); ?>
-                                                        <select name="class_date" id="class_date" class="form-control" required>
-                                                            <option value="">No Course Selected</option>
-                                                        </select>
+                                                        <?php echo form_input(array('id' => 'datetimepicker2', 'name' => 'class_date', 'type' => 'text', 'class' => 'form-control', 'required' => 'required')); ?>
+                                                        <?php //echo form_error('cms_heading'); ?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-md-3">Start Time <span style="color: red;">*</span></label>
+                                                    <label class="control-label col-md-3">Start Time</label>
                                                     <div class="col-md-8">
-                                                        <?php //echo form_input(array('id' => 'timepicker1', 'name' => 'start_time', 'class' => 'form-control', 'required' => 'required')); ?>
-                                                        <select name="start_time" id="start_time" class="form-control" required>
-                                                            <option value="">No Class Date Selected</option>
-                                                        </select>
+                                                        <?php echo form_input(array('id' => 'timepicker1', 'name' => 'start_time', 'class' => 'form-control', 'required' => 'required')); ?>
+                                                        <?php //echo form_error('cms_sub_heading'); ?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label col-md-3">End Time <span style="color: red;">*</span></label>
+                                                    <label class="control-label col-md-3">End Time</label>
                                                     <div class="col-md-8">
-                                                        <?php //echo form_input(array('id' => 'timepicker2', 'name' => 'end_time', 'class' => 'form-control', 'required' => 'required')); ?>
-                                                        <select name="end_time" id="end_time" class="form-control" required>
-                                                            <option value="">No Class Date Selected</option>
-                                                        </select>
+                                                        <?php echo form_input(array('id' => 'timepicker2', 'name' => 'end_time', 'class' => 'form-control', 'required' => 'required')); ?>
+                                                        <?php //echo form_error('description'); ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,69 +129,25 @@
         </div>
     </div>
 </div>
-<style>
-/* .form .form-bordered .form-group>div{
-    padding: 15px 15px 0px 15px !important;
-} */
-</style>
 <script src="<?php echo base_url(); ?>js/jquery.js"></script>
 <script src="<?php echo base_url(); ?>js/jquery.datetimepicker.full.js"></script>
 <script>
-$.datetimepicker.setLocale('en');
-$('#timepicker1').datetimepicker({
-    datepicker: false,
-    format: 'H:i',
-    step: 5
-});
-$('#timepicker2').datetimepicker({
-    datepicker: false,
-    format: 'H:i',
-    step: 5
-});
-$('#datetimepicker2').datetimepicker({
-    format: 'd-m-Y',
-    timepicker: false,
-    formatDate: 'd-m-Y',
-    minDate: '-2016/11/03', // yesterday is minimum date
-});
-$('#datetimepicker_dark').datetimepicker({ theme: 'dark' })
-
-$('#course_idd').change(function() {
-    var course_id = $(this).val();
-    $.ajax({
-        type: "POST",
-        url: "<?php echo base_url(); ?>supercontrol/batch/getSessionDate",
-        data: {course_id: course_id},
-        success: function(data) {
-            $('#class_date').html(data);
-        }
+    $.datetimepicker.setLocale('en');
+    $('#timepicker1').datetimepicker({
+        datepicker: false,
+        format: 'H:i',
+        step: 5
     });
-})
-
-$('#class_date').change(function() {
-    var date = $(this).val();
-    $.ajax({
-        type: "POST",
-        url: "<?php echo base_url(); ?>supercontrol/batch/getSessionTime",
-        data: {date: date},
-        success: function(data) {
-            var sessions = JSON.parse(data);
-                var start_time_options = '<option value="">Select Start Time</option>';
-                var end_time_options = '<option value="">Select End Time</option>';
-
-                if (sessions.length > 0) {
-                    sessions.forEach(function(session) {
-                        start_time_options += '<option value="' + session.starttime + '">' + session.starttime + '</option>';
-                        end_time_options += '<option value="' + session.endtime + '">' + session.endtime + '</option>';
-                    });
-                } else {
-                    start_time_options += '<option value="">No start times available</option>';
-                    end_time_options += '<option value="">No end times available</option>';
-                }
-
-                $('#start_time').html(start_time_options);
-                $('#end_time').html(end_time_options);
-        }
+    $('#timepicker2').datetimepicker({
+        datepicker: false,
+        format: 'H:i',
+        step: 5
     });
-})
+    $('#datetimepicker2').datetimepicker({
+        format: 'd-m-Y',
+        timepicker: false,
+        formatDate: 'd-m-Y',
+        minDate: '-2016/11/03', // yesterday is minimum date
+    });
+    $('#datetimepicker_dark').datetimepicker({ theme: 'dark' })
 </script>
