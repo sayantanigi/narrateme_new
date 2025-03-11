@@ -33,16 +33,16 @@
                   <div class="price-detail-div">
                     <p><strong>Course Price:</strong> £<?= $course->price ; ?></p>
                     <!--<p><strong>Total Duration:</strong> 6 hours</p>-->
-                    <p><strong>Course Level:</strong> <?php 
-                                $this->load->model('generalmodel'); 
+                    <p><strong>Course Level:</strong> <?php
+                                $this->load->model('generalmodel');
                                 $table_name = 'sm_levels';
                                 $primary_key = 'id';
                                 $wheredata = $course->course_level;
                                 $queryalllevels = $this->generalmodel->getAllData($table_name,$primary_key,$wheredata,'','');
                                 echo $queryalllevels[0]->level_title;
                             ?></p>
-                                    <p><strong>Delivery Method: </strong> <?php 
-                                $this->load->model('generalmodel'); 
+                                    <p><strong>Delivery Method: </strong> <?php
+                                $this->load->model('generalmodel');
                                 $table_name = 'sm_mode';
                                 $primary_key = 'id';
                                 $wheredata = $course->course_mode;
@@ -168,7 +168,7 @@
               </div>
               <div role="tabpanel" class="tab-pane fade in" id="syllabus">
                             <div class="faq-accordion" id="faqExample">
-                               <?php $ctn=1; foreach($querysyll as $fa){?>     
+                               <?php $ctn=1; foreach($querysyll as $fa){?>
                                 <div class="card">
                                     <div class="card-header" id="headingOne">
                                         <h5 class="collapsed" data-toggle="collapse" data-target="#collapseOne<?php echo $ctn;?>" aria-expanded="false" aria-controls="collapseOne">
@@ -199,7 +199,7 @@
                   <div class="reviews-row even">
                     <div class="reviews-row-content">
                       <div class="quote-icon"> <img src="images/quote-icon.png" alt=""></div>
-                      <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by 
+                      <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by
                         injected humour, or randomised words which don't look even slightly believable. <strong>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</strong> All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. </p>
                       <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using <strong>'Content here, content here', default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</strong> It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
                       <h4>William </h4>

@@ -146,7 +146,7 @@
                                                     <th>Session Objective</th>
                                                     <th>Location</th>
                                                     <?php if(!empty($getisPurchased)) {?>
-                                                    <!-- <th>Meeting Code</th> -->
+                                                    <th>Meeting Code</th>
                                                     <th>Action</th>
                                                     <?php } ?>
                                                 </tr>
@@ -173,26 +173,24 @@
                                                         ?>
                                                     </td>
                                                     <?php if(!empty($getisPurchased)) { ?>
-                                                    <!-- <td onclick="copyText(<?= $bs->id?>)" id="meeting-code-<?= $bs->id?>">
+                                                    <td onclick="copyText(<?= $bs->id?>)" id="meeting-code-<?= $bs->id?>">
                                                         <?php
                                                         $getmeetingData = $this->db->query("SELECT * FROM sm_course_instructor WHERE course_id = '".$course->course_id."' AND class_date like '%".$bs->date."%' AND start_time = '".$bs->starttime."' AND end_time = '".$bs->endtime."'")->row();
                                                         echo $getmeetingData->meeting_code;
                                                         ?>
-                                                    </td> -->
+                                                    </td>
                                                     <td>
                                                         <?php
                                                         $getmeetingData = $this->db->query("SELECT * FROM sm_course_instructor WHERE course_id = '".$course->course_id."' AND class_date like '%".$bs->date."%' AND start_time = '".$bs->starttime."' AND end_time = '".$bs->endtime."'")->row();
-                                                        if(!empty($getmeetingData->meeting_code)) {
-                                                        $studentId = $getisPurchased->student_id;
-                                                        $student_details = $this->db->query("SELECT * FROM na_member WHERE id = '".$studentId."'")->row();
-                                                        ?>
-                                                        <a href="https://adgoogly.com/join/<?= @$getmeetingData->meeting_code; ?>?userName=<?= @$student_details->username; ?>&userEmail=<?= @$student_details->email; ?>" class="btn red btn-sm btn-outline sbold uppercase" target="_blank">Join Class</a>
+                                                        if(!empty($getmeetingData->meeting_code)){ ?>
+                                                        <a href="https://adgoogly.com/" class="btn red btn-sm btn-outline sbold uppercase" target="_blank">Join Meeting</a>
                                                         <?php } else { ?>
-                                                        <a href="javascript:void(0)" class="btn red btn-sm btn-outline sbold uppercase">Class Link not created yet</a>
+                                                        <a href="javascript:void(0)" class="btn red btn-sm btn-outline sbold uppercase">Meeting code not available</a>
                                                         <?php } ?>
                                                     </td>
+                                                    <?php } ?>
                                                 </tr>
-                                                <?php $ctb++; } } } }?>
+                                                <?php $ctb++; } } }?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -222,7 +220,7 @@
                                                                         alt=""></figure>
                                                                 <div class="all-content">
                                                                     <div class="hd-bt clearfix">
-                                                                        <h3><?php echo $i['course_name']; ?></h3>
+                                                                        <h3 style="width: 100%;"><?php echo $i['course_name']; ?></h3>
                                                                     </div>
                                                                     <div class="price-view">
                                                                         <span style="margin-left: 5px;">Price
@@ -241,7 +239,7 @@
                                                                         </p>
                                                                     </div>
                                                                     <div class="both-bt">
-                                                                        <a href="<?= base_url(); ?>course-module/courses/upcomingcoursedetails/<?php echo $i['course_id']; ?>" class="button-default orange">Course Details</a>
+                                                                        <a href="<?= base_url(); ?>courses/upcomingcoursedetails/<?php echo $i['course_id']; ?>" class="button-default orange">Course Details</a>
                                                                         <!-- <a href="<?= base_url(); ?>courses/payment" class="button-default orange">Book Now</a> -->
                                                                         <!-- <a href="#" class="button-default orange">Book Now</a> -->
                                                                         <?php
