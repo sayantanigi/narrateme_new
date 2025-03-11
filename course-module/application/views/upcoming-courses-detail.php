@@ -42,6 +42,7 @@
     padding: 10px;
     transition: opacity 0.5s ease-in-out;
 }
+.hd-bt h3 {width: 100% !important;}
 </style>
 <div class="inner-banner">
     <div class="blue-banenr">
@@ -185,9 +186,12 @@
                                                         if(!empty($getmeetingData->meeting_code)) {
                                                         $studentId = $getisPurchased->student_id;
                                                         $student_details = $this->db->query("SELECT * FROM na_member WHERE id = '".$studentId."'")->row();
-                                                        ?>
+                                                        $current_date = date('Y-m-d');
+                                                        if(strtotime($current_date) < strtotime($bs->date)) { ?>
                                                         <a href="https://adgoogly.com/join/<?= @$getmeetingData->meeting_code; ?>?userName=<?= @$student_details->username; ?>&userEmail=<?= @$student_details->email; ?>" class="btn red btn-sm btn-outline sbold uppercase" target="_blank">Join Class</a>
                                                         <?php } else { ?>
+                                                        <a href="javascript:void(0)" class="btn red btn-sm btn-outline sbold uppercase">Class Link Expired</a>
+                                                        <?php } } else { ?>
                                                         <a href="javascript:void(0)" class="btn red btn-sm btn-outline sbold uppercase">Class Link not created yet</a>
                                                         <?php } ?>
                                                     </td>

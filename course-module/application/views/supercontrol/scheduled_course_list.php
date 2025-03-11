@@ -121,17 +121,17 @@
                                                     </td>
                                                     <!-- <td id="meeting-code-<?php echo $count; ?>"><?php echo $i->meeting_code; ?> <i class="fa-regular fa-copy" onclick="copyText('<?php echo $count; ?>')"></i></td> -->
                                                     <td>
-                                                        <?php if ($i->status == '1') { ?>
-                                                            <a href="<?= admin_url('instscheduleDStatus/' . $i->inst_id) ?>"><span class="badge bg-green">Active</span></a>
-                                                        <?php } else { ?>
-                                                            <a href="<?= admin_url('instscheduleAStatus/' . $i->inst_id) ?>"><span class="badge bg-red">Inactive</span></a>
-                                                        <?php } ?>
+                                                    <?php if (@$i->status == '1') { ?>
+                                                        <a href="<?= base_url('supercontrol/batch/instscheduleDStatus/' . @$i->inst_id) ?>"><span class="badge bg-green">Active</span></a>
+                                                    <?php } else { ?>
+                                                        <a href="<?= base_url('supercontrol/batch/instscheduleAStatus/' . @$i->inst_id) ?>"><span class="badge bg-red">Inactive</span></a>
+                                                    <?php } ?>
                                                     </td>
                                                     <td>
                                                         <?php
                                                         $joinURL = 'https://adgoogly.com/join/'.$i->meeting_code.'/?userName='.$user->username.'&userEmail='.$user->email;
                                                         ?>
-                                                        <a href=" https://adgoogly.com/join/<?= $i->meeting_code; ?>?userName=<?= $user->username?>&userEmail=<?= $user->email; ?>" class="btn red btn-sm btn-outline sbold uppercase" target="_blank">Join Class</a>
+                                                        <a href="https://adgoogly.com/join/<?= $i->meeting_code; ?>?userName=<?= $user->username?>&userEmail=<?= $user->email; ?>" class="btn red btn-sm btn-outline sbold uppercase" target="_blank">Join Class</a>
                                                         <a href="mailto:?subject=<?= 'Meeting link for '. $course; ?>&body=<?= 'Dear Student, Please click on the link below and use the meeting code to join for the course. Join URL: '.urlencode($joinURL).''?>" target="_blank" class="btn red btn-sm btn-outline sbold uppercase shareBtn1"> Share via Email</a>
                                                         <a onclick="deleteone(<?php echo $i->inst_id; ?>);" class="btn red btn-sm btn-outline sbold uppercase" href="javascript:Void(0);">Delete</a>
                                                     </td>
@@ -156,6 +156,7 @@
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
 <script>
 function copyText(count) {
     var copyText = document.getElementById('meeting-code-' + count).innerText;
@@ -180,15 +181,6 @@ function copyText(count) {
         document.body.removeChild(copiedTextDiv);
     }, 3000);
 }
-function f1(stat, id) {
-    $.ajax({
-        type: "get",
-        url: "<?php echo base_url(); ?>supercontrol/property/statusproperty",
-        data: { stat: stat, id: id }
-
-    });
-    //$.get('<?php echo base_url(); ?>banner/statusbanner',{ stat : stat , id : id });
-}
 function deleteone(id) {
     swal({
         title: 'Are You sure want to delete this record?',
@@ -202,7 +194,7 @@ function deleteone(id) {
         closeOnCancel: true
     }, function (isConfirm) {
         if (isConfirm) {
-            window.location.href = '<?= admin_url('deleteinstschedule/') ?>' + id
+            window.location.href = '<?= base_url('supercontrol/batch/deleteinstschedule/') ?>' + id
         }
     });
 }
